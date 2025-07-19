@@ -78,6 +78,9 @@
     <link rel="icon" type="image/svg+xml" href="terminal-icon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
 
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://github.com" />
     <link rel="preconnect" href="https://www.apache.org" />
@@ -1417,6 +1420,22 @@
       <div class="nav-container">
         <div class="terminal-prompt-nav" aria-label="Terminal prompt">
           openclispec@terminal:~$
+          <a
+            href="/sitemap.html"
+            style="
+              color: #888;
+              font-size: 0.8rem;
+              margin-left: 10px;
+              text-decoration: none;
+              border-bottom: 1px solid transparent;
+              transition: all 0.3s ease;
+            "
+            onmouseover="this.style.color='#00ff41'; this.style.borderBottom='1px solid #00ff41';"
+            onmouseout="this.style.color='#888'; this.style.borderBottom='1px solid transparent';"
+            title="Site Map"
+          >
+            map
+          </a>
         </div>
         <nav role="navigation" aria-label="Main navigation">
           <ul class="nav-tabs">
@@ -1664,6 +1683,24 @@
                   community of developers passionate about improving
                   command-line interfaces. We welcome contributions, feedback,
                   and participation from developers worldwide.
+                </p>
+
+                <h3>Site Navigation</h3>
+                <p>
+                  <strong>Sitemap:</strong>
+                  <a
+                    href="/sitemap.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Complete site navigation</a
+                  >
+                  |
+                  <a
+                    href="/sitemap.xml"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >XML sitemap</a
+                  >
                 </p>
               </div>
             </div>

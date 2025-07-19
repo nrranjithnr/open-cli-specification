@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>Sitemap | OCLIS - Open CLI Specification</title>
+    <meta name="title" content="Sitemap | OCLIS - Open CLI Specification" />
+    <meta
+      name="description"
+      content="Site navigation and structure for OpenCLI Specification - the industry standard for defining command-line interfaces."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="author" content="OpenCLI Working Group" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://openclispec.com/sitemap.html" />
+    <meta
+      property="og:title"
+      content="Sitemap | OCLIS - Open CLI Specification"
+    />
+    <meta
+      property="og:description"
+      content="Site navigation and structure for OpenCLI Specification - the industry standard for defining command-line interfaces."
+    />
+    <meta property="og:image" content="https://openclispec.com/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://openclispec.com/sitemap.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Sitemap | OCLIS - Open CLI Specification"
+    />
+    <meta
+      property="twitter:description"
+      content="Site navigation and structure for OpenCLI Specification."
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://openclispec.com/sitemap.html" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="terminal-icon.svg" />
+
+    <!-- JSON-LD Structured Data for Sitemap -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Sitemap - OpenCLI Specification",
+        "description": "Site navigation and structure for OpenCLI Specification website",
+        "url": "https://openclispec.com/sitemap.html",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "OpenCLI Specification",
+          "url": "https://openclispec.com"
+        }
+      }
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        background-color: #0a0a0a;
+        color: #00ff41;
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 2px solid #00ff41;
+        padding-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        color: #00ff41;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      .header p {
+        color: #cccccc;
+        font-size: 1.1rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #00ff41;
+        text-decoration: none;
+        border: 1px solid #00ff41;
+        padding: 8px 15px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        background: #00ff41;
+        color: #0a0a0a;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      /* Terminal Window Styling */
+      .sitemap-section {
+        background-color: #1a1a1a;
+        border: 2px solid #00ff41;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .section-header {
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        padding: 10px 15px;
+        border-bottom: 1px solid #00ff41;
+        display: flex;
+        align-items: center;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .terminal-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .terminal-button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .terminal-button.close {
+        background-color: #ff5f56;
+      }
+      .terminal-button.minimize {
+        background-color: #ffbd2e;
+      }
+      .terminal-button.maximize {
+        background-color: #27ca3f;
+      }
+
+      .section-title {
+        margin-left: 15px;
+        color: #00ff41;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .section-content {
+        padding: 20px;
+        background-color: #0a0a0a;
+        border-radius: 0 0 6px 6px;
+      }
+
+      .section-content h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+      }
+
+      .section-content h3 {
+        color: #00ff41;
+        font-size: 1.2rem;
+        margin: 20px 0 10px;
+      }
+
+      /* Link Lists */
+      .link-list {
+        list-style: none;
+        margin: 15px 0;
+      }
+
+      .link-list li {
+        margin: 8px 0;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .link-list li::before {
+        content: "$ ";
+        position: absolute;
+        left: 0;
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .link-list a {
+        color: #cccccc;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid transparent;
+      }
+
+      .link-list a:hover {
+        color: #00ff41;
+        border-bottom: 1px solid #00ff41;
+        text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+      }
+
+      .link-description {
+        color: #888;
+        font-size: 0.9rem;
+        margin-left: 10px;
+      }
+
+      /* File Links */
+      .file-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+      }
+
+      .file-item {
+        background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .file-item:hover {
+        border-color: #00ff41;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+      }
+
+      .file-name {
+        color: #00ff41;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .file-type {
+        color: #ffff99;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .file-description {
+        color: #cccccc;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      /* Search Box */
+      .search-container {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .search-box {
+        background: #1a1a1a;
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        padding: 10px 15px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .search-box:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      .search-box::placeholder {
+        color: #666;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .file-list {
+          grid-template-columns: 1fr;
+        }
+
+        .section-content {
+          padding: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.5rem;
+        }
+
+        .section-content {
+          padding: 10px;
+        }
+      }
+
+      /* Print Styles */
+      @media print {
+        body {
+          background: white;
+          color: black;
+        }
+
+        .sitemap-section {
+          border: 1px solid black;
+          box-shadow: none;
+        }
+
+        .section-header {
+          background: #f0f0f0;
+        }
+
+        .terminal-buttons {
+          display: none;
+        }
+
+        a {
+          color: black !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <a href="/" class="back-link">← Back to Home</a>
+        <h1>Site Map</h1>
+        <p>Complete navigation structure for OpenCLI Specification</p>
+      </div>
+
+      <!-- Search -->
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-box"
+          placeholder="Search sitemap..."
+          id="searchBox"
+          aria-label="Search sitemap"
+        />
+      </div>
+
+      <!-- Main Navigation -->
+      <div class="sitemap-section">
+        <div class="section-header">
+          <div class="terminal-buttons">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+          </div>
+          <div class="section-title">navigation.yaml</div>
+        </div>
+        <div class="section-content">
+          <h2>Main Website Sections</h2>
+          <ul class="link-list">
+            <li>
+              <a href="/">Home</a>
+              <span class="link-description"
+                >- Main landing page with overview</span
+              >
+            </li>
+            <li>
+              <a href="/#spec">Specification</a>
+              <span class="link-description"
+                >- Complete OpenCLI YAML specification</span
+              >
+            </li>
+            <li>
+              <a href="/#examples">Examples</a>
+              <span class="link-description"
+                >- Real-world CLI specification examples</span
+              >
+            </li>
+            <li>
+              <a href="/#validator">Validator</a>
+              <span class="link-description"
+                >- CLI specification validation tools</span
+              >
+            </li>
+            <li>
+              <a href="/#about">About</a>
+              <span class="link-description"
+                >- Project information and community</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- External Links -->
+      <div class="sitemap-section">
+        <div class="section-header">
+          <div class="terminal-buttons">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+          </div>
+          <div class="section-title">external-links.json</div>
+        </div>
+        <div class="section-content">
+          <h2>External Resources</h2>
+          <h3>Development & Community</h3>
+          <ul class="link-list">
+            <li>
+              <a
+                href="https://github.com/openclispec/open-cli-specification"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub Repository
+              </a>
+              <span class="link-description"
+                >- Source code, issues, and contributions</span
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/openclispec/open-cli-specification/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Issue Tracker
+              </a>
+              <span class="link-description"
+                >- Bug reports and feature requests</span
+              >
+            </li>
+          </ul>
+
+          <h3>Legal & Licensing</h3>
+          <ul class="link-list">
+            <li>
+              <a
+                href="https://www.apache.org/licenses/LICENSE-2.0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Apache 2.0 License
+              </a>
+              <span class="link-description"
+                >- Full license text and terms</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Technical Resources -->
+      <div class="sitemap-section">
+        <div class="section-header">
+          <div class="terminal-buttons">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+          </div>
+          <div class="section-title">meta-resources.xml</div>
+        </div>
+        <div class="section-content">
+          <h2>Meta & Technical</h2>
+          <ul class="link-list">
+            <li>
+              <a href="/sitemap.xml">XML Sitemap</a>
+              <span class="link-description"
+                >- Machine-readable sitemap for search engines</span
+              >
+            </li>
+            <li>
+              <a href="/sitemap.html">HTML Sitemap</a>
+              <span class="link-description"
+                >- This page - human-readable site navigation</span
+              >
+            </li>
+            <li>
+              <a href="/terminal-icon.svg">Site Icon</a>
+              <span class="link-description"
+                >- Terminal-themed favicon in SVG format</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Search functionality
+      document
+        .getElementById("searchBox")
+        .addEventListener("input", function (e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const allLinks = document.querySelectorAll(
+            ".link-list a, .file-name a"
+          );
+          const allSections = document.querySelectorAll(".sitemap-section");
+
+          allSections.forEach((section) => {
+            let hasMatch = false;
+            const links = section.querySelectorAll(
+              ".link-list a, .file-name a"
+            );
+
+            links.forEach((link) => {
+              const text = link.textContent.toLowerCase();
+              const description = link.parentElement.querySelector(
+                ".link-description, .file-description"
+              );
+              const descriptionText = description
+                ? description.textContent.toLowerCase()
+                : "";
+
+              if (
+                text.includes(searchTerm) ||
+                descriptionText.includes(searchTerm)
+              ) {
+                link.parentElement.style.display = "";
+                hasMatch = true;
+              } else {
+                link.parentElement.style.display = searchTerm ? "none" : "";
+              }
+            });
+
+            // Hide/show entire section based on matches
+            section.style.display = searchTerm && !hasMatch ? "none" : "";
+          });
+        });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "/" && !e.target.matches("input")) {
+          e.preventDefault();
+          document.getElementById("searchBox").focus();
+        }
+      });
+
+      // Add loading animation
+      window.addEventListener("load", function () {
+        document
+          .querySelectorAll(".sitemap-section")
+          .forEach((section, index) => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+
+            setTimeout(() => {
+              section.style.transition = "all 0.5s ease";
+              section.style.opacity = "1";
+              section.style.transform = "translateY(0)";
+            }, index * 100);
+          });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://openclispec.com/sitemap.xml
+
+# Crawl delay (be nice to servers)
+Crawl-delay: 1
+
+# Allow common resources
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.svg$
+Allow: /*.yaml$
+Allow: /*.yml$
+Allow: /*.md$
+
+# Disallow common non-content files
+Disallow: /*.git/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /.gitignore
+
+# Cache policy
+Cache-delay: 3600
