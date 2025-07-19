@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"
+    />
 
     <!-- Primary Meta Tags -->
     <title>
@@ -560,14 +563,50 @@
       }
 
       /* Responsive Design */
+
+      /* Large tablets and small desktops */
+      @media (max-width: 1024px) {
+        .container {
+          max-width: 960px;
+          padding: 0 25px;
+        }
+
+        .nav-tab a {
+          padding: 12px 18px;
+          font-size: 0.85rem;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .landing-intro h2 {
+          font-size: 1.6rem;
+        }
+
+        .landing-intro p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Tablets */
       @media (max-width: 768px) {
+        .container {
+          padding: 0 20px;
+        }
+
         .title-content {
           flex-direction: column;
-          gap: 5px;
+          gap: 8px;
+          padding: 5px 0;
         }
 
         .title-logo {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
+        }
+
+        .title-description {
+          font-size: 0.8rem;
         }
 
         .window-controls {
@@ -578,34 +617,529 @@
 
         .nav-container {
           flex-direction: column;
-          padding: 10px;
-          gap: 10px;
+          padding: 15px 20px;
+          gap: 15px;
         }
 
         .terminal-prompt-nav {
           margin-right: 0;
+          text-align: center;
+          font-size: 0.9rem;
         }
 
         .nav-tabs {
           flex-wrap: wrap;
           justify-content: center;
+          gap: 5px;
+        }
+
+        .nav-tab {
+          flex: 1;
+          min-width: 120px;
+          max-width: 150px;
         }
 
         .nav-tab a {
-          padding: 10px 15px;
-          font-size: 0.8rem;
+          padding: 12px 16px;
+          font-size: 0.85rem;
+          text-align: center;
         }
 
         .section-title {
           font-size: 2rem;
+          margin-bottom: 25px;
         }
 
+        .main-content {
+          margin-top: 170px;
+        }
+
+        .terminal-window {
+          margin: 15px 0;
+        }
+
+        .terminal-content {
+          padding: 15px;
+        }
+
+        .yaml-container {
+          padding: 12px;
+        }
+
+        .yaml-header {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+
+        .copy-button {
+          align-self: stretch;
+          text-align: center;
+        }
+
+        .coming-soon h2 {
+          font-size: 2.5rem;
+        }
+
+        .coming-soon p {
+          font-size: 1.1rem;
+        }
+
+        .about-content h3 {
+          font-size: 1.3rem;
+        }
+
+        .about-content p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Small tablets and large phones */
+      @media (max-width: 640px) {
         .container {
           padding: 0 15px;
         }
 
+        .title-bar {
+          padding: 8px 0;
+        }
+
+        .title-logo {
+          font-size: 1.1rem;
+        }
+
+        .title-description {
+          font-size: 0.75rem;
+        }
+
+        .nav-container {
+          padding: 12px 15px;
+          gap: 12px;
+        }
+
+        .nav-tabs {
+          gap: 3px;
+        }
+
+        .nav-tab {
+          min-width: 100px;
+          max-width: 130px;
+        }
+
+        .nav-tab a {
+          padding: 10px 12px;
+          font-size: 0.8rem;
+        }
+
+        .tab-close {
+          display: none; /* Hide close buttons on smaller screens */
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 20px;
+        }
+
+        .main-content {
+          margin-top: 160px;
+        }
+
+        .landing-intro h2 {
+          font-size: 1.4rem;
+        }
+
+        .landing-intro p {
+          font-size: 0.95rem;
+          margin: 0 auto 10px;
+        }
+
+        .terminal-header {
+          padding: 8px 12px;
+        }
+
+        .terminal-title {
+          font-size: 0.8rem;
+        }
+
+        .terminal-content {
+          padding: 12px;
+        }
+
+        .terminal-prompt {
+          font-size: 0.9rem;
+          word-break: break-all;
+        }
+
+        .yaml-container {
+          padding: 10px;
+        }
+
+        .yaml-line {
+          font-size: 0.9rem;
+          line-height: 1.4;
+          word-break: break-word;
+        }
+
+        .collapsible-content {
+          margin-left: 15px;
+          padding-left: 10px;
+        }
+
+        .coming-soon {
+          padding: 60px 0;
+        }
+
+        .coming-soon h2 {
+          font-size: 2rem;
+        }
+
+        .coming-soon p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Mobile phones */
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 12px;
+        }
+
+        .title-content {
+          gap: 5px;
+        }
+
+        .title-logo {
+          font-size: 1rem;
+        }
+
+        .title-description {
+          font-size: 0.7rem;
+        }
+
+        .control-button {
+          width: 10px;
+          height: 10px;
+        }
+
+        .nav-container {
+          padding: 10px 12px;
+          gap: 10px;
+        }
+
+        .terminal-prompt-nav {
+          font-size: 0.8rem;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .nav-tabs {
+          flex-direction: row;
+          overflow-x: auto;
+          scrollbar-width: thin;
+          scrollbar-color: #00ff41 #1a1a1a;
+          padding-bottom: 5px;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+          height: 4px;
+        }
+
+        .nav-tabs::-webkit-scrollbar-track {
+          background: #1a1a1a;
+        }
+
+        .nav-tabs::-webkit-scrollbar-thumb {
+          background: #00ff41;
+          border-radius: 2px;
+        }
+
+        .nav-tab {
+          flex: 0 0 auto;
+          min-width: 90px;
+          max-width: 110px;
+        }
+
+        .nav-tab a {
+          padding: 8px 10px;
+          font-size: 0.75rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+          margin-bottom: 15px;
+        }
+
         .main-content {
           margin-top: 150px;
+        }
+
+        .landing-intro h2 {
+          font-size: 1.2rem;
+          margin-bottom: 15px;
+        }
+
+        .landing-intro p {
+          font-size: 0.9rem;
+          margin: 0 auto 8px;
+        }
+
+        .terminal-window {
+          margin: 10px 0;
+          border-radius: 6px;
+        }
+
+        .terminal-header {
+          padding: 6px 10px;
+        }
+
+        .terminal-button {
+          width: 10px;
+          height: 10px;
+        }
+
+        .terminal-title {
+          font-size: 0.75rem;
+          margin-left: 10px;
+        }
+
+        .terminal-content {
+          padding: 10px;
+        }
+
+        .terminal-prompt {
+          font-size: 0.8rem;
+          margin-bottom: 8px;
+        }
+
+        .yaml-container {
+          padding: 8px;
+          margin: 15px 0;
+        }
+
+        .yaml-header {
+          margin-bottom: 10px;
+          padding-bottom: 8px;
+        }
+
+        .yaml-header span {
+          font-size: 0.9rem;
+        }
+
+        .copy-button {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+
+        .yaml-line {
+          font-size: 0.8rem;
+          line-height: 1.3;
+          margin: 3px 0;
+        }
+
+        .expandable::before {
+          margin-right: 3px;
+        }
+
+        .collapsible-content {
+          margin-left: 12px;
+          padding-left: 8px;
+        }
+
+        .coming-soon {
+          padding: 40px 0;
+        }
+
+        .coming-soon h2 {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+        }
+
+        .coming-soon p {
+          font-size: 0.9rem;
+        }
+
+        .about-content h3 {
+          font-size: 1.1rem;
+          margin: 20px 0 10px;
+        }
+
+        .about-content p {
+          font-size: 0.9rem;
+          margin-bottom: 12px;
+        }
+      }
+
+      /* Very small phones */
+      @media (max-width: 320px) {
+        .container {
+          padding: 0 8px;
+        }
+
+        .title-logo {
+          font-size: 0.9rem;
+        }
+
+        .title-description {
+          font-size: 0.65rem;
+        }
+
+        .nav-container {
+          padding: 8px;
+        }
+
+        .terminal-prompt-nav {
+          font-size: 0.7rem;
+        }
+
+        .nav-tab {
+          min-width: 80px;
+          max-width: 95px;
+        }
+
+        .nav-tab a {
+          padding: 6px 8px;
+          font-size: 0.7rem;
+        }
+
+        .section-title {
+          font-size: 1.3rem;
+        }
+
+        .landing-intro h2 {
+          font-size: 1.1rem;
+        }
+
+        .landing-intro p {
+          font-size: 0.85rem;
+        }
+
+        .terminal-content {
+          padding: 8px;
+        }
+
+        .yaml-container {
+          padding: 6px;
+        }
+
+        .yaml-line {
+          font-size: 0.75rem;
+        }
+
+        .copy-button {
+          padding: 5px 10px;
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Landscape orientation optimizations */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .title-bar {
+          padding: 5px 0;
+        }
+
+        .nav-container {
+          padding: 8px 15px;
+        }
+
+        .main-content {
+          margin-top: 120px;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+        }
+
+        .coming-soon {
+          padding: 30px 0;
+        }
+
+        .coming-soon h2 {
+          font-size: 2rem;
+          margin-bottom: 10px;
+        }
+
+        .terminal-window {
+          margin: 8px 0;
+        }
+      }
+
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .terminal-button,
+        .control-button {
+          border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-tab {
+          border-width: 0.5px;
+        }
+
+        .terminal-window {
+          border-width: 1px;
+        }
+      }
+
+      /* Dark mode preference support */
+      @media (prefers-color-scheme: dark) {
+        /* Already optimized for dark theme */
+      }
+
+      /* Reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .cursor {
+          animation: none;
+        }
+
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* Print optimizations */
+      @media print {
+        .title-bar,
+        .header,
+        .window-controls,
+        .terminal-buttons,
+        .copy-button,
+        .tab-close {
+          display: none !important;
+        }
+
+        .main-content {
+          margin-top: 0;
+        }
+
+        .section {
+          display: block !important;
+          page-break-before: always;
+        }
+
+        .section:first-child {
+          page-break-before: avoid;
+        }
+
+        .terminal-window {
+          border: 2px solid #000;
+          box-shadow: none;
+        }
+
+        .yaml-line {
+          color: #000 !important;
+        }
+
+        .yaml-key,
+        .yaml-value,
+        .yaml-string,
+        .yaml-number {
+          color: #000 !important;
         }
       }
 
@@ -699,6 +1233,103 @@
 
       .skip-link:focus {
         top: 6px;
+      }
+
+      /* Touch device optimizations */
+      .touch-device .copy-button,
+      .touch-device .terminal-button,
+      .touch-device .control-button {
+        min-height: 12px;
+        min-width: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .touch-device .nav-tab a {
+        min-height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .touch-device .expandable {
+        min-height: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Focus indicators for keyboard navigation */
+      .nav-tab a:focus,
+      .copy-button:focus,
+      .expandable:focus {
+        outline: 2px solid #00ff41;
+        outline-offset: 2px;
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .terminal-window {
+          border-width: 3px;
+        }
+
+        .nav-tab {
+          border-width: 2px;
+        }
+
+        .yaml-key,
+        .section-title {
+          font-weight: 900;
+        }
+      }
+
+      /* Content overflow handling */
+      .yaml-line {
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #00ff41 #1a1a1a;
+      }
+
+      .yaml-line::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .yaml-line::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+
+      .yaml-line::-webkit-scrollbar-thumb {
+        background: #00ff41;
+        border-radius: 2px;
+      }
+
+      /* Loading states */
+      .loading {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #00ff41;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
       }
 
       /* Print styles */
@@ -1183,6 +1814,15 @@ commands:
               sectionId + "-title"
             ).textContent;
             document.title = `${sectionTitle} | OCLIS - Open CLI Specification`;
+
+            // Scroll active tab into view on mobile
+            if (window.innerWidth <= 480) {
+              tab.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center",
+              });
+            }
           });
         });
 
@@ -1194,6 +1834,38 @@ commands:
             console.log("Tab close clicked");
           });
         });
+
+        // Add touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener("touchend", (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipeGesture();
+        });
+
+        function handleSwipeGesture() {
+          const swipeThreshold = 50;
+          const swipeDistance = touchEndX - touchStartX;
+
+          if (Math.abs(swipeDistance) > swipeThreshold) {
+            const activeTab = document.querySelector(".nav-tab.active");
+            const allTabs = Array.from(navTabs);
+            const currentIndex = allTabs.indexOf(activeTab);
+
+            if (swipeDistance > 0 && currentIndex > 0) {
+              // Swipe right - go to previous tab
+              allTabs[currentIndex - 1].click();
+            } else if (swipeDistance < 0 && currentIndex < allTabs.length - 1) {
+              // Swipe left - go to next tab
+              allTabs[currentIndex + 1].click();
+            }
+          }
+        }
       }
 
       // Fixed YAML parsing and rendering
@@ -1454,6 +2126,85 @@ commands:
               toggleExpand(target);
             }
           }
+
+          // Arrow key navigation for tabs
+          if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+            const activeTab = document.querySelector(".nav-tab.active");
+            const allTabs = Array.from(document.querySelectorAll(".nav-tab"));
+            const currentIndex = allTabs.indexOf(activeTab);
+
+            if (e.key === "ArrowLeft" && currentIndex > 0) {
+              e.preventDefault();
+              allTabs[currentIndex - 1].querySelector("a").focus();
+              allTabs[currentIndex - 1].click();
+            } else if (
+              e.key === "ArrowRight" &&
+              currentIndex < allTabs.length - 1
+            ) {
+              e.preventDefault();
+              allTabs[currentIndex + 1].querySelector("a").focus();
+              allTabs[currentIndex + 1].click();
+            }
+          }
+        });
+      }
+
+      // Responsive utilities
+      function handleResize() {
+        const isMobile = window.innerWidth <= 768;
+        const navTabs = document.querySelector(".nav-tabs");
+
+        // Adjust YAML indentation for mobile
+        document.querySelectorAll(".yaml-line").forEach((line) => {
+          const currentPadding = parseInt(line.style.paddingLeft) || 0;
+          if (isMobile && currentPadding > 40) {
+            line.style.paddingLeft = Math.max(10, currentPadding * 0.7) + "px";
+          }
+        });
+
+        // Handle long terminal prompts on mobile
+        const terminalPrompts = document.querySelectorAll(".terminal-prompt");
+        terminalPrompts.forEach((prompt) => {
+          if (isMobile && prompt.textContent.length > 30) {
+            prompt.style.wordBreak = "break-all";
+            prompt.style.lineHeight = "1.2";
+          }
+        });
+      }
+
+      // Debounced resize handler
+      let resizeTimeout;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleResize, 150);
+      });
+
+      // Touch improvements for mobile
+      function addTouchImprovements() {
+        // Improve button touch targets
+        const buttons = document.querySelectorAll(
+          ".copy-button, .terminal-button, .control-button"
+        );
+        buttons.forEach((button) => {
+          button.style.minHeight = "12px";
+          button.style.minWidth = "12px";
+        });
+
+        // Add haptic feedback for supported devices
+        document.querySelectorAll(".expandable").forEach((element) => {
+          element.addEventListener("click", () => {
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+          });
+        });
+
+        // Prevent zoom on double-tap for form elements
+        document.querySelectorAll("button, a").forEach((element) => {
+          element.addEventListener("touchend", (e) => {
+            e.preventDefault();
+            element.click();
+          });
         });
       }
 
@@ -1461,6 +2212,8 @@ commands:
       document.addEventListener("DOMContentLoaded", () => {
         initNavigation();
         addKeyboardNavigation();
+        addTouchImprovements();
+        handleResize(); // Initial responsive setup
 
         // Render YAML content
         document.getElementById("yaml-content").innerHTML =
@@ -1481,6 +2234,34 @@ commands:
             }
           }
         });
+
+        // Handle orientation changes
+        window.addEventListener("orientationchange", () => {
+          setTimeout(handleResize, 500); // Delay to allow orientation change to complete
+        });
+
+        // Add viewport meta tag if not present (fallback)
+        if (!document.querySelector('meta[name="viewport"]')) {
+          const viewport = document.createElement("meta");
+          viewport.name = "viewport";
+          viewport.content =
+            "width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0";
+          document.head.appendChild(viewport);
+        }
+
+        // Improve accessibility for mobile screen readers
+        if ("ontouchstart" in window) {
+          document.body.classList.add("touch-device");
+
+          // Add screen reader hints for swipe gestures
+          const navContainer = document.querySelector(".nav-container");
+          if (navContainer) {
+            navContainer.setAttribute(
+              "aria-label",
+              "Main navigation - swipe left or right to navigate between tabs"
+            );
+          }
+        }
       });
 
       // Performance optimization: lazy load content
