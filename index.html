@@ -3,7 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OCLIS - Open CLI Specification</title>
+
+    <!-- Primary Meta Tags -->
+    <title>
+      OCLIS - Open CLI Specification | Standardize Command-Line Interfaces
+    </title>
+    <meta
+      name="title"
+      content="OCLIS - Open CLI Specification | Standardize Command-Line Interfaces"
+    />
+    <meta
+      name="description"
+      content="OpenCLI Spec (OCLIS) is the industry standard for defining, documenting, and validating command-line interfaces. Create consistent, machine-readable CLI specifications with YAML format. Free, open-source, and cross-platform compatible."
+    />
+    <meta
+      name="keywords"
+      content="CLI specification, command line interface, OpenCLI, OCLIS, CLI documentation, command line tools, CLI standard, YAML CLI spec, terminal interface, developer tools, open source CLI, command line specification, CLI validation, CLI generator, API for CLI"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="author" content="OpenCLI Working Group" />
+    <meta name="copyright" content="Apache 2.0 License" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://openclispec.com/" />
+    <meta
+      property="og:title"
+      content="OCLIS - Open CLI Specification | Standardize Command-Line Interfaces"
+    />
+    <meta
+      property="og:description"
+      content="The industry standard for defining command-line interfaces. Create consistent, machine-readable CLI specifications with YAML format. Free and open-source."
+    />
+    <meta property="og:image" content="https://openclispec.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="OpenCLI Specification" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://openclispec.com/" />
+    <meta property="twitter:title" content="OCLIS - Open CLI Specification" />
+    <meta
+      property="twitter:description"
+      content="The industry standard for defining command-line interfaces. Create consistent, machine-readable CLI specifications with YAML format."
+    />
+    <meta
+      property="twitter:image"
+      content="https://openclispec.com/twitter-image.png"
+    />
+    <meta property="twitter:creator" content="@openclispec" />
+    <meta property="twitter:site" content="@openclispec" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#00ff41" />
+    <meta name="msapplication-TileColor" content="#00ff41" />
+    <meta name="application-name" content="OpenCLI Specification" />
+    <meta name="apple-mobile-web-app-title" content="OCLIS" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://openclispec.com/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://github.com" />
+    <link rel="preconnect" href="https://www.apache.org" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "OpenCLI Specification",
+        "alternateName": "OCLIS",
+        "description": "The industry standard for defining, documenting, and validating command-line interfaces in a machine-readable YAML format.",
+        "url": "https://openclispec.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "OpenCLI Working Group",
+          "url": "https://github.com/openclispec"
+        },
+        "datePublished": "2025-07-19",
+        "dateModified": "2025-07-19",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "programmingLanguage": "YAML",
+        "screenshot": "https://openclispec.com/screenshot.png",
+        "downloadUrl": "https://github.com/openclispec/open-cli-specification",
+        "codeRepository": "https://github.com/openclispec/open-cli-specification",
+        "keywords": "CLI, command line interface, specification, YAML, developer tools, open source"
+      }
+    </script>
+
+    <!-- Additional Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OpenCLI Working Group",
+        "url": "https://openclispec.com",
+        "logo": "https://openclispec.com/logo.png",
+        "sameAs": ["https://github.com/openclispec/open-cli-specification"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "technical support",
+          "url": "https://github.com/openclispec/open-cli-specification/issues"
+        }
+      }
+    </script>
+
+    <!-- Website Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "OpenCLI Specification",
+        "alternateName": "OCLIS",
+        "url": "https://openclispec.com",
+        "description": "The official website for OpenCLI Specification - the industry standard for defining command-line interfaces.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://openclispec.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
     <style>
       * {
         margin: 0;
@@ -23,6 +167,16 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
+      }
+
+      /* SEO Hidden Content for Search Engines */
+      .seo-content {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
       }
 
       /* Title Bar */
@@ -525,17 +679,104 @@
       html {
         scroll-behavior: smooth;
       }
+
+      /* Performance optimization */
+      .terminal-window,
+      .nav-tab,
+      .copy-button {
+        will-change: transform;
+      }
+
+      /* Accessibility improvements */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #00ff41;
+        color: #0a0a0a;
+        padding: 8px;
+        text-decoration: none;
+        z-index: 100;
+        border-radius: 4px;
+      }
+
+      .skip-link:focus {
+        top: 6px;
+      }
+
+      /* Print styles */
+      @media print {
+        .header,
+        .title-bar {
+          position: static;
+        }
+        .main-content {
+          margin-top: 0;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- SEO Content for Search Engines -->
+    <div class="seo-content">
+      <h1>
+        OpenCLI Specification - The Standard for Command-Line Interface
+        Documentation
+      </h1>
+      <p>
+        OCLIS (OpenCLI Specification) is the industry-leading standard for
+        defining, documenting, and validating command-line interfaces using YAML
+        format. Our specification enables developers to create consistent,
+        machine-readable CLI documentation that works across all platforms
+        including Linux, macOS, and Windows.
+      </p>
+
+      <h2>Key Features of OpenCLI Specification</h2>
+      <ul>
+        <li>YAML-based CLI specification format</li>
+        <li>Cross-platform compatibility (Linux, macOS, Windows)</li>
+        <li>Machine-readable documentation</li>
+        <li>CLI validation and testing tools</li>
+        <li>Open source and free to use</li>
+        <li>Community-driven development</li>
+        <li>Integration with popular development tools</li>
+        <li>Comprehensive examples and documentation</li>
+      </ul>
+
+      <h2>Why Choose OpenCLI Specification?</h2>
+      <p>
+        OpenCLI Specification solves the problem of inconsistent command-line
+        interface documentation. With OCLIS, you can standardize your CLI tools,
+        improve developer experience, and ensure your command-line applications
+        are well-documented and easily understood by users and other developers.
+      </p>
+
+      <h2>Supported Platforms and Architectures</h2>
+      <p>
+        OpenCLI Specification supports all major platforms: Linux (amd64,
+        arm64), Darwin/macOS (amd64, arm64), and Windows (amd64, arm64). This
+        makes it the perfect choice for cross-platform command-line tool
+        development.
+      </p>
+    </div>
+
     <!-- Title Bar -->
     <div class="title-bar">
       <div class="container">
         <div class="title-content">
           <div class="window-controls">
-            <div class="control-button close"></div>
-            <div class="control-button minimize"></div>
-            <div class="control-button maximize"></div>
+            <div class="control-button close" aria-label="Close window"></div>
+            <div
+              class="control-button minimize"
+              aria-label="Minimize window"
+            ></div>
+            <div
+              class="control-button maximize"
+              aria-label="Maximize window"
+            ></div>
           </div>
           <div class="title-logo">OCLIS</div>
           <div class="title-description">(Open CLI Specification)</div>
@@ -544,43 +785,50 @@
     </div>
 
     <!-- Navigation Header -->
-    <header class="header">
+    <header class="header" role="banner">
       <div class="nav-container">
-        <div class="terminal-prompt-nav">openclispec@terminal:~$</div>
-        <ul class="nav-tabs">
-          <li class="nav-tab active" data-section="spec">
-            <a href="#spec">
-              spec.yaml
-              <span class="tab-close">×</span>
-            </a>
-          </li>
-          <li class="nav-tab" data-section="examples">
-            <a href="#examples">
-              examples.yaml
-              <span class="tab-close">×</span>
-            </a>
-          </li>
-          <li class="nav-tab" data-section="validator">
-            <a href="#validator">
-              validator.sh
-              <span class="tab-close">×</span>
-            </a>
-          </li>
-          <li class="nav-tab" data-section="about">
-            <a href="#about">
-              README.md
-              <span class="tab-close">×</span>
-            </a>
-          </li>
-        </ul>
+        <div class="terminal-prompt-nav" aria-label="Terminal prompt">
+          openclispec@terminal:~$
+        </div>
+        <nav role="navigation" aria-label="Main navigation">
+          <ul class="nav-tabs">
+            <li class="nav-tab active" data-section="spec">
+              <a href="#spec" aria-describedby="spec-description">
+                spec.yaml
+                <span class="tab-close" aria-label="Close tab">×</span>
+              </a>
+            </li>
+            <li class="nav-tab" data-section="examples">
+              <a href="#examples" aria-describedby="examples-description">
+                examples.yaml
+                <span class="tab-close" aria-label="Close tab">×</span>
+              </a>
+            </li>
+            <li class="nav-tab" data-section="validator">
+              <a href="#validator" aria-describedby="validator-description">
+                validator.sh
+                <span class="tab-close" aria-label="Close tab">×</span>
+              </a>
+            </li>
+            <li class="nav-tab" data-section="about">
+              <a href="#about" aria-describedby="about-description">
+                README.md
+                <span class="tab-close" aria-label="Close tab">×</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content" role="main">
       <div class="container">
         <!-- Spec Section -->
-        <section id="spec" class="section active">
-          <h1 class="section-title">OpenCLI Specification</h1>
+        <section id="spec" class="section active" aria-labelledby="spec-title">
+          <h1 id="spec-title" class="section-title">OpenCLI Specification</h1>
+          <div id="spec-description" class="seo-content">
+            Complete YAML specification for OpenCLI standard
+          </div>
 
           <div class="landing-intro">
             <h2>Standardizing Command-Line Interfaces</h2>
@@ -598,9 +846,18 @@
           <div class="terminal-window">
             <div class="terminal-header">
               <div class="terminal-buttons">
-                <div class="terminal-button close"></div>
-                <div class="terminal-button minimize"></div>
-                <div class="terminal-button maximize"></div>
+                <div
+                  class="terminal-button close"
+                  aria-label="Close terminal"
+                ></div>
+                <div
+                  class="terminal-button minimize"
+                  aria-label="Minimize terminal"
+                ></div>
+                <div
+                  class="terminal-button maximize"
+                  aria-label="Maximize terminal"
+                ></div>
               </div>
               <div class="terminal-title">opencli-spec.yaml</div>
             </div>
@@ -614,12 +871,20 @@
                   <span style="color: #00ff41; font-weight: bold"
                     >OpenCLI Specification v1.0.0</span
                   >
-                  <button class="copy-button" onclick="copyYamlToClipboard()">
+                  <button
+                    class="copy-button"
+                    onclick="copyYamlToClipboard()"
+                    aria-label="Copy YAML specification to clipboard"
+                  >
                     Copy YAML
                   </button>
                 </div>
 
-                <div id="yaml-content">
+                <div
+                  id="yaml-content"
+                  role="region"
+                  aria-label="YAML specification content"
+                >
                   <!-- YAML content will be generated by JavaScript -->
                 </div>
               </div>
@@ -628,15 +893,27 @@
         </section>
 
         <!-- Examples Section -->
-        <section id="examples" class="section">
-          <h1 class="section-title">Examples</h1>
+        <section id="examples" class="section" aria-labelledby="examples-title">
+          <h1 id="examples-title" class="section-title">Examples</h1>
+          <div id="examples-description" class="seo-content">
+            Real-world examples of OpenCLI specifications
+          </div>
 
           <div class="terminal-window">
             <div class="terminal-header">
               <div class="terminal-buttons">
-                <div class="terminal-button close"></div>
-                <div class="terminal-button minimize"></div>
-                <div class="terminal-button maximize"></div>
+                <div
+                  class="terminal-button close"
+                  aria-label="Close terminal"
+                ></div>
+                <div
+                  class="terminal-button minimize"
+                  aria-label="Minimize terminal"
+                ></div>
+                <div
+                  class="terminal-button maximize"
+                  aria-label="Maximize terminal"
+                ></div>
               </div>
               <div class="terminal-title">example-commands.yaml</div>
             </div>
@@ -653,12 +930,17 @@
                   <button
                     class="copy-button"
                     onclick="copyExampleToClipboard()"
+                    aria-label="Copy example YAML to clipboard"
                   >
                     Copy YAML
                   </button>
                 </div>
 
-                <div id="example-content">
+                <div
+                  id="example-content"
+                  role="region"
+                  aria-label="Example YAML content"
+                >
                   <!-- Example content will be generated by JavaScript -->
                 </div>
               </div>
@@ -667,8 +949,15 @@
         </section>
 
         <!-- Validator Section -->
-        <section id="validator" class="section">
-          <h1 class="section-title">Validator</h1>
+        <section
+          id="validator"
+          class="section"
+          aria-labelledby="validator-title"
+        >
+          <h1 id="validator-title" class="section-title">Validator</h1>
+          <div id="validator-description" class="seo-content">
+            CLI specification validator tool
+          </div>
 
           <div class="coming-soon">
             <h2>Coming Soon<span class="cursor">_</span></h2>
@@ -681,16 +970,28 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section">
-          <h1 class="section-title">About OpenCLI Spec</h1>
+        <section id="about" class="section" aria-labelledby="about-title">
+          <h1 id="about-title" class="section-title">About OpenCLI Spec</h1>
+          <div id="about-description" class="seo-content">
+            Learn about the OpenCLI project and community
+          </div>
 
           <div class="about-content">
             <div class="terminal-window">
               <div class="terminal-header">
                 <div class="terminal-buttons">
-                  <div class="terminal-button close"></div>
-                  <div class="terminal-button minimize"></div>
-                  <div class="terminal-button maximize"></div>
+                  <div
+                    class="terminal-button close"
+                    aria-label="Close terminal"
+                  ></div>
+                  <div
+                    class="terminal-button minimize"
+                    aria-label="Minimize terminal"
+                  ></div>
+                  <div
+                    class="terminal-button maximize"
+                    aria-label="Maximize terminal"
+                  ></div>
                 </div>
                 <div class="terminal-title">README.md</div>
               </div>
@@ -714,17 +1015,17 @@
                 <h3>Links</h3>
                 <p>
                   <strong>GitHub:</strong>
-                  <a href="https://github.com/opencli/spec" target="_blank"
-                    >https://github.com/opencli/spec</a
-                  ><br />
-                  <strong>Documentation:</strong>
-                  <a href="https://openclispec.com/docs" target="_blank"
-                    >https://openclispec.com/docs</a
+                  <a
+                    href="https://github.com/openclispec/open-cli-specification"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >https://github.com/openclispec/open-cli-specification</a
                   ><br />
                   <strong>License:</strong>
                   <a
                     href="https://www.apache.org/licenses/LICENSE-2.0"
                     target="_blank"
+                    rel="noopener noreferrer"
                     >Apache 2.0</a
                   >
                 </p>
@@ -752,13 +1053,13 @@ info:
   version: 1.0.0
   contact:
     name: OpenCLI Working Group
-    url: https://github.com/opencli/spec
+    url: https://github.com/openclispec/open-cli-specification
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 externalDocs:
   description: Find out more about OpenCLI
-  url: https://openclispec.com/docs
+  url: https://openclispec.com
 platforms:
   linux:
     - amd64
@@ -879,6 +1180,12 @@ commands:
             // Update active section
             sections.forEach((s) => s.classList.remove("active"));
             document.getElementById(sectionId).classList.add("active");
+
+            // Update page title for better SEO
+            const sectionTitle = document.getElementById(
+              sectionId + "-title"
+            ).textContent;
+            document.title = `${sectionTitle} | OCLIS - Open CLI Specification`;
           });
         });
 
@@ -928,10 +1235,10 @@ commands:
               // This is a parent key with nested content
               html += `<div class="yaml-line expandable" style="padding-left: ${
                 indent * 10
-              }px;" onclick="toggleExpand(this)">`;
+              }px;" onclick="toggleExpand(this)" tabindex="0" role="button" aria-expanded="false">`;
               html += `<span class="yaml-key">${key}:</span>`;
               html += `</div>`;
-              html += `<div class="collapsible-content">`;
+              html += `<div class="collapsible-content" role="region">`;
 
               // Parse nested content
               i++;
@@ -994,10 +1301,10 @@ commands:
               // Nested parent key
               html += `<div class="yaml-line expandable" style="padding-left: ${
                 indent * 10
-              }px;" onclick="toggleExpand(this)">`;
+              }px;" onclick="toggleExpand(this)" tabindex="0" role="button" aria-expanded="false">`;
               html += `<span class="yaml-key">${key}:</span>`;
               html += `</div>`;
-              html += `<div class="collapsible-content">`;
+              html += `<div class="collapsible-content" role="region">`;
 
               i++;
               const nestedResult = parseNestedContent(lines, i, indent);
@@ -1085,6 +1392,9 @@ commands:
 
       function toggleExpand(element) {
         element.classList.toggle("expanded");
+        const isExpanded = element.classList.contains("expanded");
+        element.setAttribute("aria-expanded", isExpanded);
+
         const content = element.nextElementSibling;
         if (content && content.classList.contains("collapsible-content")) {
           content.classList.toggle("expanded");
@@ -1137,9 +1447,23 @@ commands:
           });
       }
 
+      // SEO and Performance optimizations
+      function addKeyboardNavigation() {
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            const target = e.target;
+            if (target.classList.contains("expandable")) {
+              e.preventDefault();
+              toggleExpand(target);
+            }
+          }
+        });
+      }
+
       // Initialize the page
       document.addEventListener("DOMContentLoaded", () => {
         initNavigation();
+        addKeyboardNavigation();
 
         // Render YAML content
         document.getElementById("yaml-content").innerHTML =
@@ -1153,6 +1477,7 @@ commands:
           if (indent <= 20) {
             // Top-level or first-level items
             element.classList.add("expanded");
+            element.setAttribute("aria-expanded", "true");
             const content = element.nextElementSibling;
             if (content && content.classList.contains("collapsible-content")) {
               content.classList.add("expanded");
@@ -1160,6 +1485,21 @@ commands:
           }
         });
       });
+
+      // Performance optimization: lazy load content
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        });
+
+        document.querySelectorAll(".section").forEach((section) => {
+          observer.observe(section);
+        });
+      }
     </script>
   </body>
 </html>
