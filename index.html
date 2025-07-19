@@ -3,36 +3,1163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OpenCLISpec - Coming Soon</title>
-    <link rel="stylesheet" href="main.css" />
+    <title>OCLIS - Open CLI Specification</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        background-color: #0a0a0a;
+        color: #00ff41;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Title Bar */
+      .title-bar {
+        background-color: #1a1a1a;
+        border-bottom: 1px solid #333;
+        padding: 10px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+      }
+
+      .title-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .title-logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00ff41;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      .title-description {
+        color: #888;
+        font-size: 0.9rem;
+      }
+
+      /* Terminal Window Controls */
+      .window-controls {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 8px;
+      }
+
+      .control-button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .control-button.close {
+        background-color: #ff5f56;
+      }
+      .control-button.minimize {
+        background-color: #ffbd2e;
+      }
+      .control-button.maximize {
+        background-color: #27ca3f;
+      }
+
+      /* Header and Navigation */
+      .header {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        background-color: #0a0a0a;
+        border-bottom: 2px solid #00ff41;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 255, 65, 0.2);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .terminal-prompt-nav {
+        color: #00ff41;
+        margin-right: 15px;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      .nav-tabs {
+        display: flex;
+        gap: 3px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+      }
+
+      .nav-tab {
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        border: 1px solid #444;
+        border-bottom: none;
+        border-radius: 8px 8px 0 0;
+        position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .nav-tab::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00ff41, transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-tab.active {
+        background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+        border-color: #00ff41;
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+      }
+
+      .nav-tab.active::before {
+        opacity: 1;
+      }
+
+      .nav-tab a {
+        display: block;
+        padding: 12px 20px;
+        color: #888;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        position: relative;
+        font-size: 0.9rem;
+      }
+
+      .nav-tab.active a {
+        color: #00ff41;
+        text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+      }
+
+      .nav-tab:hover:not(.active) {
+        background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+        border-color: #666;
+        transform: translateY(-1px);
+      }
+
+      .nav-tab:hover:not(.active) a {
+        color: #ccc;
+      }
+
+      /* Tab close button */
+      .tab-close {
+        display: inline-block;
+        margin-left: 8px;
+        color: #666;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .nav-tab:hover .tab-close {
+        opacity: 1;
+      }
+
+      .nav-tab.active .tab-close {
+        color: #00ff41;
+        opacity: 0.7;
+      }
+
+      .tab-close:hover {
+        color: #ff5f56 !important;
+        opacity: 1 !important;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-top: 130px;
+        min-height: calc(100vh - 130px);
+      }
+
+      .section {
+        min-height: 100vh;
+        padding: 40px 0;
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #00ff41;
+        margin-bottom: 30px;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      /* Terminal Window */
+      .terminal-window {
+        background-color: #1a1a1a;
+        border: 2px solid #00ff41;
+        border-radius: 8px;
+        margin: 20px 0;
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .terminal-header {
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        padding: 10px 15px;
+        border-bottom: 1px solid #00ff41;
+        display: flex;
+        align-items: center;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .terminal-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .terminal-button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .terminal-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 5px currentColor;
+      }
+
+      .terminal-button.close {
+        background-color: #ff5f56;
+      }
+      .terminal-button.minimize {
+        background-color: #ffbd2e;
+      }
+      .terminal-button.maximize {
+        background-color: #27ca3f;
+      }
+
+      .terminal-title {
+        margin-left: 15px;
+        color: #00ff41;
+        font-size: 0.9rem;
+        flex: 1;
+      }
+
+      .terminal-content {
+        padding: 20px;
+        background-color: #0a0a0a;
+        font-family: "Courier New", monospace;
+        border-radius: 0 0 6px 6px;
+      }
+
+      /* Landing Section Styling */
+      .landing-intro {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .landing-intro h2 {
+        font-size: 1.8rem;
+        color: #00ff41;
+        margin-bottom: 20px;
+      }
+
+      .landing-intro p {
+        font-size: 1.1rem;
+        color: #cccccc;
+        max-width: 800px;
+        margin: 0 auto 15px;
+      }
+
+      .terminal-prompt {
+        color: #00ff41;
+        margin-bottom: 10px;
+      }
+
+      .terminal-output {
+        color: #cccccc;
+        margin-bottom: 20px;
+        padding-left: 20px;
+      }
+
+      /* YAML Viewer */
+      .yaml-container {
+        background-color: #0f0f0f;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 20px 0;
+        position: relative;
+      }
+
+      .yaml-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #333;
+      }
+
+      .copy-button {
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        color: #00ff41;
+        border: 1px solid #00ff41;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Courier New", monospace;
+        transition: all 0.3s ease;
+        margin-left: auto;
+      }
+
+      .copy-button:hover {
+        background: linear-gradient(145deg, #00ff41, #00cc33);
+        color: #0a0a0a;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+
+      .yaml-line {
+        margin: 5px 0;
+        font-family: "Courier New", monospace;
+        white-space: pre;
+      }
+
+      .yaml-key {
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .yaml-value {
+        color: #ffff99;
+      }
+
+      .yaml-string {
+        color: #ff6b6b;
+      }
+
+      .yaml-number {
+        color: #4ecdc4;
+      }
+
+      .yaml-comment {
+        color: #666;
+      }
+
+      .expandable {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .expandable::before {
+        content: "▶ ";
+        color: #00ff41;
+        font-weight: bold;
+        margin-right: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      .expandable.expanded::before {
+        transform: rotate(90deg);
+        content: "▼ ";
+      }
+
+      .collapsible-content {
+        display: none;
+        margin-left: 20px;
+        border-left: 2px solid #333;
+        padding-left: 15px;
+      }
+
+      .collapsible-content.expanded {
+        display: block;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .title-content {
+          flex-direction: column;
+          gap: 5px;
+        }
+
+        .title-logo {
+          font-size: 1.2rem;
+        }
+
+        .window-controls {
+          position: static;
+          transform: none;
+          order: -1;
+        }
+
+        .nav-container {
+          flex-direction: column;
+          padding: 10px;
+          gap: 10px;
+        }
+
+        .terminal-prompt-nav {
+          margin-right: 0;
+        }
+
+        .nav-tabs {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .nav-tab a {
+          padding: 10px 15px;
+          font-size: 0.8rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .container {
+          padding: 0 15px;
+        }
+
+        .main-content {
+          margin-top: 150px;
+        }
+      }
+
+      /* About Section */
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .about-content h3 {
+        color: #00ff41;
+        margin: 30px 0 15px;
+        font-size: 1.5rem;
+      }
+
+      .about-content p {
+        color: #cccccc;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+
+      .about-content a {
+        color: #00ff41;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-bottom 0.3s ease;
+      }
+
+      .about-content a:hover {
+        border-bottom: 1px solid #00ff41;
+      }
+
+      /* Coming Soon */
+      .coming-soon {
+        text-align: center;
+        padding: 100px 0;
+      }
+
+      .coming-soon h2 {
+        font-size: 3rem;
+        color: #00ff41;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+      }
+
+      .coming-soon p {
+        font-size: 1.2rem;
+        color: #cccccc;
+      }
+
+      /* Animations */
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .cursor {
+        animation: blink 1s infinite;
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1>OpenCLISpec</h1>
-      <p>
-        Your open specification for defining and documenting command-line tools.
-      </p>
+    <!-- Title Bar -->
+    <div class="title-bar">
+      <div class="container">
+        <div class="title-content">
+          <div class="window-controls">
+            <div class="control-button close"></div>
+            <div class="control-button minimize"></div>
+            <div class="control-button maximize"></div>
+          </div>
+          <div class="title-logo">OCLIS</div>
+          <div class="title-description">(Open CLI Specification)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+      <div class="nav-container">
+        <div class="terminal-prompt-nav">openclispec@terminal:~$</div>
+        <ul class="nav-tabs">
+          <li class="nav-tab active" data-section="spec">
+            <a href="#spec">
+              spec.yaml
+              <span class="tab-close">×</span>
+            </a>
+          </li>
+          <li class="nav-tab" data-section="examples">
+            <a href="#examples">
+              examples.yaml
+              <span class="tab-close">×</span>
+            </a>
+          </li>
+          <li class="nav-tab" data-section="validator">
+            <a href="#validator">
+              validator.sh
+              <span class="tab-close">×</span>
+            </a>
+          </li>
+          <li class="nav-tab" data-section="about">
+            <a href="#about">
+              README.md
+              <span class="tab-close">×</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
-    <main>
-      <section>
-        <h2>Standardizing CLIs for Better Automation</h2>
-        <p>
-          Join us in revolutionizing the CLI ecosystem with OpenCLISpec. Our
-          vision is to create a unified standard that enhances automation and
-          interoperability across command-line tools.
-        </p>
-      </section>
-      <section>
-        <h2>Contact & Updates</h2>
-        <p>
-          Want to stay in the loop or contribute? Reach out to us at
-          <a href="mailto:contact@openclispec.com">contact@openclispec.com</a>
-          and follow our progress!
-        </p>
-      </section>
+
+    <main class="main-content">
+      <div class="container">
+        <!-- Spec Section -->
+        <section id="spec" class="section active">
+          <h1 class="section-title">OpenCLI Specification</h1>
+
+          <div class="landing-intro">
+            <h2>Standardizing Command-Line Interfaces</h2>
+            <p>
+              OpenCLI Spec provides a standardized way to define, document, and
+              validate command-line interfaces across different platforms and
+              programming languages.
+            </p>
+            <p>
+              Say goodbye to inconsistent CLI documentation and hello to
+              machine-readable, human-friendly specifications.
+            </p>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-buttons">
+                <div class="terminal-button close"></div>
+                <div class="terminal-button minimize"></div>
+                <div class="terminal-button maximize"></div>
+              </div>
+              <div class="terminal-title">opencli-spec.yaml</div>
+            </div>
+            <div class="terminal-content">
+              <div class="terminal-prompt">
+                openclispec@terminal:~$ cat opencli-spec.yaml
+              </div>
+
+              <div class="yaml-container">
+                <div class="yaml-header">
+                  <span style="color: #00ff41; font-weight: bold"
+                    >OpenCLI Specification v1.0.0</span
+                  >
+                  <button class="copy-button" onclick="copyYamlToClipboard()">
+                    Copy YAML
+                  </button>
+                </div>
+
+                <div id="yaml-content">
+                  <!-- YAML content will be generated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="section">
+          <h1 class="section-title">Examples</h1>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-buttons">
+                <div class="terminal-button close"></div>
+                <div class="terminal-button minimize"></div>
+                <div class="terminal-button maximize"></div>
+              </div>
+              <div class="terminal-title">example-commands.yaml</div>
+            </div>
+            <div class="terminal-content">
+              <div class="terminal-prompt">
+                openclispec@terminal:~$ cat examples/basic-cli.yaml
+              </div>
+
+              <div class="yaml-container">
+                <div class="yaml-header">
+                  <span style="color: #00ff41; font-weight: bold"
+                    >Basic CLI Example</span
+                  >
+                  <button
+                    class="copy-button"
+                    onclick="copyExampleToClipboard()"
+                  >
+                    Copy YAML
+                  </button>
+                </div>
+
+                <div id="example-content">
+                  <!-- Example content will be generated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Validator Section -->
+        <section id="validator" class="section">
+          <h1 class="section-title">Validator</h1>
+
+          <div class="coming-soon">
+            <h2>Coming Soon<span class="cursor">_</span></h2>
+            <p>The OpenCLI Spec validator is currently under development.</p>
+            <p>
+              It will help you validate your CLI specifications against the
+              OpenCLI standard.
+            </p>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+          <h1 class="section-title">About OpenCLI Spec</h1>
+
+          <div class="about-content">
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="terminal-buttons">
+                  <div class="terminal-button close"></div>
+                  <div class="terminal-button minimize"></div>
+                  <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title">README.md</div>
+              </div>
+              <div class="terminal-content">
+                <h3>What is OpenCLI Spec?</h3>
+                <p>
+                  OpenCLI Spec is an open-source specification for defining
+                  command-line interfaces in a standardized, machine-readable
+                  format. It enables developers to create consistent,
+                  well-documented CLIs that can be automatically validated and
+                  integrated across different tools and platforms.
+                </p>
+
+                <h3>Project Goals</h3>
+                <p>• Standardize CLI documentation and specification</p>
+                <p>• Enable automatic CLI validation and testing</p>
+                <p>• Improve developer experience with consistent interfaces</p>
+                <p>• Support cross-platform compatibility</p>
+                <p>• Foster community-driven CLI best practices</p>
+
+                <h3>Links</h3>
+                <p>
+                  <strong>GitHub:</strong>
+                  <a href="https://github.com/opencli/spec" target="_blank"
+                    >https://github.com/opencli/spec</a
+                  ><br />
+                  <strong>Documentation:</strong>
+                  <a href="https://openclispec.com/docs" target="_blank"
+                    >https://openclispec.com/docs</a
+                  ><br />
+                  <strong>License:</strong>
+                  <a
+                    href="https://www.apache.org/licenses/LICENSE-2.0"
+                    target="_blank"
+                    >Apache 2.0</a
+                  >
+                </p>
+
+                <h3>Community</h3>
+                <p>
+                  OpenCLI Spec is developed by the OpenCLI Working Group, a
+                  community of developers passionate about improving
+                  command-line interfaces. We welcome contributions, feedback,
+                  and participation from developers worldwide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
-    <footer>
-      <p>Stay tuned!</p>
-    </footer>
+
+    <script>
+      // OpenCLI Specification YAML
+      const opencliSpec = `opencli: 1.0.0
+info:
+  title: Open Command-Line Interface Specification
+  description: Standard for defining command-line interfaces
+  version: 1.0.0
+  contact:
+    name: OpenCLI Working Group
+    url: https://github.com/opencli/spec
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Find out more about OpenCLI
+  url: https://openclispec.com/docs
+platforms:
+  linux:
+    - amd64
+    - arm64
+  darwin:
+    - amd64
+    - arm64
+  windows:
+    - amd64
+    - arm64
+tags:
+  - name: core
+    description: Core commands and utilities
+  - name: data
+    description: Data processing commands
+  - name: auth
+    description: Authentication and user management
+  - name: system
+    description: System-level commands and utilities
+
+commands:
+  ocs/:
+    summary: Open CLI Spec generator
+    description: Main entry point for the CLI
+    operationId: rootCommand
+    tags:
+      - core
+    parameters:
+      - name: version
+        in: flag
+        alias:
+          - V
+        description: Show CLI version
+
+      - name: help
+        in: flag
+        alias:
+          - h
+        description: Show help information
+
+    responses:
+      0:
+        description: Version information
+        content:
+          text/plain:
+            schema:
+              type: string
+            example: |
+              CLI v1.0.0
+              OpenCLI Spec v1.0.0
+          application/json:
+            schema:
+              type: object
+              properties:
+                cliVersion: { type: string, example: 1.0.0 }
+                specVersion: { type: string, example: 1.0.0 }
+                platform: { type: string, example: linux-amd64 }
+
+      2:
+        description: Invalid parameter combination
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"`;
+
+      // Example YAML
+      const exampleYaml = `opencli: 1.0.0
+info:
+  title: My CLI Tool
+  description: A sample CLI application
+  version: 2.1.0
+  
+commands:
+  hello/:
+    summary: Say hello
+    description: Greets the user
+    parameters:
+      - name: name
+        in: argument
+        description: Name to greet
+        required: true
+        schema:
+          type: string
+      - name: times
+        in: flag
+        alias: [t]
+        description: Number of times to greet
+        schema:
+          type: integer
+          default: 1
+    responses:
+      0:
+        description: Success
+        content:
+          text/plain:
+            example: "Hello, World!"`;
+
+      // Navigation functionality
+      function initNavigation() {
+        const navTabs = document.querySelectorAll(".nav-tab");
+        const sections = document.querySelectorAll(".section");
+
+        navTabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            // Don't trigger if clicking the close button
+            if (e.target.classList.contains("tab-close")) {
+              return;
+            }
+
+            const sectionId = tab.dataset.section;
+
+            // Update active tab
+            navTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            // Update active section
+            sections.forEach((s) => s.classList.remove("active"));
+            document.getElementById(sectionId).classList.add("active");
+          });
+        });
+
+        // Handle tab close buttons (optional functionality)
+        document.querySelectorAll(".tab-close").forEach((closeBtn) => {
+          closeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            // You could add close tab functionality here
+            console.log("Tab close clicked");
+          });
+        });
+      }
+
+      // Fixed YAML parsing and rendering
+      function parseYamlToHTML(yamlText) {
+        const lines = yamlText.split("\n");
+        const result = parseYamlLines(lines, 0);
+        return result.html;
+      }
+
+      function parseYamlLines(lines, startIndex) {
+        let html = "";
+        let i = startIndex;
+
+        while (i < lines.length) {
+          const line = lines[i];
+
+          if (line.trim() === "") {
+            html += '<div class="yaml-line"></div>';
+            i++;
+            continue;
+          }
+
+          const indent = line.match(/^ */)[0].length;
+          const trimmedLine = line.trim();
+
+          if (trimmedLine.startsWith("#")) {
+            html += `<div class="yaml-line" style="padding-left: ${
+              indent * 10
+            }px;"><span class="yaml-comment">${line}</span></div>`;
+            i++;
+          } else if (trimmedLine.includes(":")) {
+            const [key, ...valueParts] = trimmedLine.split(":");
+            const value = valueParts.join(":").trim();
+
+            if (value === "" || hasNestedContent(lines, i, indent)) {
+              // This is a parent key with nested content
+              html += `<div class="yaml-line expandable" style="padding-left: ${
+                indent * 10
+              }px;" onclick="toggleExpand(this)">`;
+              html += `<span class="yaml-key">${key}:</span>`;
+              html += `</div>`;
+              html += `<div class="collapsible-content">`;
+
+              // Parse nested content
+              i++;
+              const nestedResult = parseNestedContent(lines, i, indent);
+              html += nestedResult.html;
+              i = nestedResult.nextIndex;
+
+              html += `</div>`;
+            } else {
+              // Simple key-value pair
+              html += formatKeyValueLine(line, indent);
+              i++;
+            }
+          } else if (trimmedLine.startsWith("-")) {
+            html += formatListLine(line, indent);
+            i++;
+          } else {
+            html += `<div class="yaml-line" style="padding-left: ${
+              indent * 10
+            }px;"><span class="yaml-value">${line}</span></div>`;
+            i++;
+          }
+        }
+
+        return { html, nextIndex: i };
+      }
+
+      function parseNestedContent(lines, startIndex, parentIndent) {
+        let html = "";
+        let i = startIndex;
+
+        while (i < lines.length) {
+          const line = lines[i];
+
+          if (line.trim() === "") {
+            html += '<div class="yaml-line"></div>';
+            i++;
+            continue;
+          }
+
+          const indent = line.match(/^ */)[0].length;
+
+          // If we've reached a line with same or lesser indentation, we're done with nested content
+          if (indent <= parentIndent) {
+            break;
+          }
+
+          const trimmedLine = line.trim();
+
+          if (trimmedLine.startsWith("#")) {
+            html += `<div class="yaml-line" style="padding-left: ${
+              indent * 10
+            }px;"><span class="yaml-comment">${line}</span></div>`;
+            i++;
+          } else if (trimmedLine.includes(":")) {
+            const [key, ...valueParts] = trimmedLine.split(":");
+            const value = valueParts.join(":").trim();
+
+            if (value === "" || hasNestedContent(lines, i, indent)) {
+              // Nested parent key
+              html += `<div class="yaml-line expandable" style="padding-left: ${
+                indent * 10
+              }px;" onclick="toggleExpand(this)">`;
+              html += `<span class="yaml-key">${key}:</span>`;
+              html += `</div>`;
+              html += `<div class="collapsible-content">`;
+
+              i++;
+              const nestedResult = parseNestedContent(lines, i, indent);
+              html += nestedResult.html;
+              i = nestedResult.nextIndex;
+
+              html += `</div>`;
+            } else {
+              // Simple nested key-value
+              html += formatKeyValueLine(line, indent);
+              i++;
+            }
+          } else if (trimmedLine.startsWith("-")) {
+            html += formatListLine(line, indent);
+            i++;
+          } else {
+            html += `<div class="yaml-line" style="padding-left: ${
+              indent * 10
+            }px;"><span class="yaml-value">${line}</span></div>`;
+            i++;
+          }
+        }
+
+        return { html, nextIndex: i };
+      }
+
+      function hasNestedContent(lines, currentIndex, currentIndent) {
+        const nextLineIndex = currentIndex + 1;
+        if (nextLineIndex >= lines.length) return false;
+
+        const nextLine = lines[nextLineIndex];
+        if (nextLine.trim() === "") {
+          // Look ahead to find the next non-empty line
+          for (let i = nextLineIndex + 1; i < lines.length; i++) {
+            if (lines[i].trim() !== "") {
+              const nextIndent = lines[i].match(/^ */)[0].length;
+              return nextIndent > currentIndent;
+            }
+          }
+          return false;
+        }
+
+        const nextIndent = nextLine.match(/^ */)[0].length;
+        return nextIndent > currentIndent;
+      }
+
+      function formatKeyValueLine(line, indent) {
+        const trimmedLine = line.trim();
+        const [key, ...valueParts] = trimmedLine.split(":");
+        const value = valueParts.join(":").trim();
+
+        let valueHtml = "";
+        if (value) {
+          if (value.match(/^".*"$/) || value.match(/^'.*'$/)) {
+            valueHtml = `<span class="yaml-string">${value}</span>`;
+          } else if (!isNaN(value) && value !== "") {
+            valueHtml = `<span class="yaml-number">${value}</span>`;
+          } else {
+            valueHtml = `<span class="yaml-value">${value}</span>`;
+          }
+        }
+
+        return `<div class="yaml-line" style="padding-left: ${
+          indent * 10
+        }px;"><span class="yaml-key">${key}:</span> ${valueHtml}</div>`;
+      }
+
+      function formatListLine(line, indent) {
+        const trimmedLine = line.trim();
+        const listValue = trimmedLine.substring(1).trim();
+        let valueHtml = "";
+
+        if (listValue.match(/^".*"$/) || listValue.match(/^'.*'$/)) {
+          valueHtml = `<span class="yaml-string">${listValue}</span>`;
+        } else if (!isNaN(listValue) && listValue !== "") {
+          valueHtml = `<span class="yaml-number">${listValue}</span>`;
+        } else {
+          valueHtml = `<span class="yaml-value">${listValue}</span>`;
+        }
+
+        return `<div class="yaml-line" style="padding-left: ${
+          indent * 10
+        }px;"><span class="yaml-key">-</span> ${valueHtml}</div>`;
+      }
+
+      function toggleExpand(element) {
+        element.classList.toggle("expanded");
+        const content = element.nextElementSibling;
+        if (content && content.classList.contains("collapsible-content")) {
+          content.classList.toggle("expanded");
+        }
+      }
+
+      function copyYamlToClipboard() {
+        navigator.clipboard
+          .writeText(opencliSpec)
+          .then(() => {
+            const button = document.querySelector(".copy-button");
+            const originalText = button.textContent;
+            button.textContent = "Copied!";
+            button.style.background =
+              "linear-gradient(145deg, #00ff41, #00cc33)";
+            button.style.color = "#0a0a0a";
+
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.style.background =
+                "linear-gradient(145deg, #2a2a2a, #1a1a1a)";
+              button.style.color = "#00ff41";
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+          });
+      }
+
+      function copyExampleToClipboard() {
+        navigator.clipboard
+          .writeText(exampleYaml)
+          .then(() => {
+            const button = document.querySelector("#examples .copy-button");
+            const originalText = button.textContent;
+            button.textContent = "Copied!";
+            button.style.background =
+              "linear-gradient(145deg, #00ff41, #00cc33)";
+            button.style.color = "#0a0a0a";
+
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.style.background =
+                "linear-gradient(145deg, #2a2a2a, #1a1a1a)";
+              button.style.color = "#00ff41";
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+          });
+      }
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", () => {
+        initNavigation();
+
+        // Render YAML content
+        document.getElementById("yaml-content").innerHTML =
+          parseYamlToHTML(opencliSpec);
+        document.getElementById("example-content").innerHTML =
+          parseYamlToHTML(exampleYaml);
+
+        // Expand top-level items by default
+        document.querySelectorAll(".expandable").forEach((element) => {
+          const indent = parseInt(element.style.paddingLeft) || 0;
+          if (indent <= 20) {
+            // Top-level or first-level items
+            element.classList.add("expanded");
+            const content = element.nextElementSibling;
+            if (content && content.classList.contains("collapsible-content")) {
+              content.classList.add("expanded");
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
