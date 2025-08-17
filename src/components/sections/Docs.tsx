@@ -470,16 +470,12 @@ title: "Weather CLI"`}</pre>
                   <div className="docs__code-header">
                     <span>Examples</span>
                     <CopyButton
-                      text={`# Good descriptions
-description: "Standard for defining command-line interfaces"
-description: "Container management platform command-line interface"
+                      text={`description: "Container management platform command-line interface"
 description: "Deploy and manage containerized applications on Kubernetes"
 description: "Unified tool to manage your AWS services from the command line"`}
                     />
                   </div>
-                  <pre className="docs__code">{`# Good descriptions
-description: "Standard for defining command-line interfaces"
-description: "Container management platform command-line interface"
+                  <pre className="docs__code">{`description: "Container management platform command-line interface"
 description: "Deploy and manage containerized applications on Kubernetes"
 description: "Unified tool to manage your AWS services from the command line"`}</pre>
                 </div>
@@ -507,20 +503,12 @@ description: "Unified tool to manage your AWS services from the command line"`}<
                   <div className="docs__code-header">
                     <span>Version Examples</span>
                     <CopyButton
-                      text={`# Semantic versioning examples
-version: "1.0.0"      # Initial stable release
-version: "1.2.3"      # Minor update with patches
-version: "2.0.0"      # Major version with breaking changes
-version: "1.0.0-beta" # Pre-release version
-version: "1.0.0-alpha.1" # Alpha release`}
+                      text={`version: "1.0.0"      # Initial stable release
+version: "1.2.3"      # Minor update with patches`}
                     />
                   </div>
-                  <pre className="docs__code">{`# Semantic versioning examples
-version: "1.0.0"      # Initial stable release
-version: "1.2.3"      # Minor update with patches
-version: "2.0.0"      # Major version with breaking changes
-version: "1.0.0-beta" # Pre-release version
-version: "1.0.0-alpha.1" # Alpha release`}</pre>
+                  <pre className="docs__code">{`version: "1.0.0"      # Initial stable release
+version: "1.2.3"      # Minor update with patches`}</pre>
                 </div>
 
                 <h5>Version Guidelines</h5>
@@ -534,8 +522,6 @@ version: "1.0.0-alpha.1" # Alpha release`}</pre>
                   <li>
                     <strong>PATCH</strong>: Increment for backward-compatible bug fixes
                   </li>
-                  <li>Use pre-release identifiers for development versions</li>
-                  <li>Always use strings, not numbers, for versions</li>
                 </ul>
               </div>
             </section>

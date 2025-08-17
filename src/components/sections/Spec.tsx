@@ -11,20 +11,20 @@ export const Spec: React.FC<SpecProps> = ({ className = '' }) => {
   const { data, loading, error, refreshSpec } = useYamlSpec();
   const [copySuccess, setCopySuccess] = useState<string>('');
 
-  const copyYamlToClipboard = async () => {
+  const copyToClipboard = async (format: 'yaml' | 'json') => {
     try {
-      // Fetch the raw YAML content
-      const response = await fetch('/opencli.yaml');
+      const url = format === 'json' ? '/opencli.json' : '/opencli.yaml';
+      const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to fetch YAML content');
+        throw new Error(`Failed to fetch ${format.toUpperCase()} content`);
       }
-      const yamlContent = await response.text();
+      const content = await response.text();
 
-      await navigator.clipboard.writeText(yamlContent);
-      setCopySuccess('YAML copied to clipboard!');
+      await navigator.clipboard.writeText(content);
+      setCopySuccess(`${format.toUpperCase()} copied to clipboard!`);
       setTimeout(() => setCopySuccess(''), 3000);
     } catch (err) {
-      setCopySuccess('Failed to copy YAML');
+      setCopySuccess(`Failed to copy ${format.toUpperCase()}`);
       setTimeout(() => setCopySuccess(''), 3000);
     }
   };
@@ -64,7 +64,7 @@ export const Spec: React.FC<SpecProps> = ({ className = '' }) => {
       <SpecificationViewer
         data={data}
         className="spec__viewer"
-        onCopyYaml={copyYamlToClipboard}
+        onCopy={copyToClipboard}
         copySuccess={copySuccess}
       />
     );
@@ -73,10 +73,10 @@ export const Spec: React.FC<SpecProps> = ({ className = '' }) => {
   return (
     <div className={`spec ${className}`} id="panel-spec" role="tabpanel" aria-labelledby="tab-spec">
       <div className="spec__header">
-        <h1>OpenCLI Specification</h1>
-        <p className="spec__description">
-          The complete YAML specification defining the OpenCLI standard for command-line interfaces.
-        </p>
+        <div className="spec__header-content">
+          <h1>OpenCLI Specification</h1>
+          <p className="spec__description">Complete YAML specification for the OpenCLI standard.</p>
+        </div>
       </div>
       <div className="spec__main">{renderContent()}</div>
     </div>
