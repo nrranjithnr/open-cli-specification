@@ -30,8 +30,43 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Debug public directory
+        run: |
+          echo "=== WORKSPACE CONTENTS ==="
+          ls -la
+          echo ""
+          echo "=== PUBLIC DIRECTORY CONTENTS ==="
+          ls -la public/
+          echo ""
+          echo "=== CHECKING SPECIFIC FILES ==="
+          for file in terminal-icon.svg opencli.yaml robots.txt sitemap.xml sitemap.html CNAME .nojekyll; do
+            if [ -f "public/$file" ]; then
+              echo "✓ public/$file exists ($(wc -c < public/$file) bytes)"
+            else
+              echo "✗ public/$file missing"
+            fi
+          done
+
       - name: Build
         run: npm run build
+
+      - name: Debug build output
+        run: |
+          echo "Contents of dist directory:"
+          ls -la dist/
+          echo ""
+          echo "Checking if assets exist:"
+          echo "terminal-icon.svg: $(test -f dist/terminal-icon.svg && echo 'EXISTS' || echo 'MISSING')"
+          echo "opencli.yaml: $(test -f dist/opencli.yaml && echo 'EXISTS' || echo 'MISSING')"
+          echo ""
+          if [ -f dist/terminal-icon.svg ]; then
+            echo "terminal-icon.svg file size: $(wc -c < dist/terminal-icon.svg) bytes"
+          fi
+          if [ -f dist/opencli.yaml ]; then
+            echo "opencli.yaml file size: $(wc -c < dist/opencli.yaml) bytes"
+            echo "First 5 lines of opencli.yaml:"
+            head -5 dist/opencli.yaml
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

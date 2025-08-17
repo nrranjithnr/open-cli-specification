@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages (gh-pages branch)
 
 on:
-  push:
-    branches: [github-pages]
+  # Disabled to avoid conflicts with deploy.yml
+  # push:
+  #   branches: [github-pages]
   workflow_dispatch:
 
 permissions:

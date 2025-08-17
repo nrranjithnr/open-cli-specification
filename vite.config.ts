@@ -79,7 +79,22 @@ export default defineConfig({
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        assetFileNames: assetInfo => {
+          // Keep specific files in root directory
+          const rootAssets = [
+            'terminal-icon.svg',
+            'opencli.yaml',
+            'robots.txt',
+            'sitemap.xml',
+            'sitemap.html',
+            'CNAME',
+            '.nojekyll',
+          ];
+          if (assetInfo.name && rootAssets.includes(assetInfo.name)) {
+            return '[name].[ext]';
+          }
+          return 'assets/[name]-[hash].[ext]';
+        },
       },
     },
     chunkSizeWarningLimit: 600,
