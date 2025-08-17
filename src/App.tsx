@@ -4,6 +4,7 @@ import { Navigation } from './components/Navigation';
 import { SEO } from './components/SEO';
 import { Home } from './components/sections/Home';
 import { Spec } from './components/sections/Spec';
+import { Docs } from './components/sections/Docs';
 import { useResponsive } from './hooks/useResponsive';
 import { TabType } from './types';
 import './styles/globals.css';
@@ -86,6 +87,8 @@ const App: React.FC = () => {
         return <Home onTabChange={handleTabChange} />;
       case 'spec':
         return <Spec />;
+      case 'docs':
+        return <Docs />;
       default:
         return <Home onTabChange={handleTabChange} />;
     }

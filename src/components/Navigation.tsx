@@ -19,6 +19,11 @@ const tabs: { id: TabType; label: string; filename: string }[] = [
     label: 'Specification',
     filename: 'opencli.yaml',
   },
+  {
+    id: 'docs',
+    label: 'Documentation',
+    filename: 'docs.md',
+  },
 ];
 
 export const Navigation: React.FC<NavigationProps> = ({
