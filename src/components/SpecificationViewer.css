@@ -1,0 +1,634 @@
+/* SpecificationViewer.css - Clean, simple YAML viewer */
+.specification-viewer {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: var(--terminal-font);
+  color: var(--terminal-text);
+  position: relative;
+}
+
+/* Top-right action buttons */
+.specification-viewer__actions {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+  align-items: center;
+}
+
+.specification-viewer__action-btn {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+}
+
+.specification-viewer__action-btn:hover {
+  background: rgba(0, 200, 255, 0.1);
+  border-color: rgba(0, 200, 255, 0.5);
+  color: var(--terminal-primary);
+  transform: translateY(-1px);
+}
+
+.specification-viewer__copy-success {
+  background: rgba(0, 255, 65, 0.15);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+/* Content */
+.specification-viewer__content {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 25px;
+  padding-top: 60px; /* Space for action buttons */
+  line-height: 1.6;
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+.specification-viewer__content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 4px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 200, 255, 0.5);
+}
+
+/* Tree structure - clean and minimal */
+.specification-viewer__tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.specification-viewer__tree-item {
+  margin: 0;
+  padding: 0;
+}
+
+.specification-viewer__tree-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  padding: 4px 0;
+  cursor: pointer;
+  line-height: 1.7;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.specification-viewer__tree-button:hover {
+  background: rgba(0, 200, 255, 0.08);
+  padding: 4px 12px;
+}
+
+.specification-viewer__tree-toggle {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.specification-viewer__tree-toggle--expanded {
+  transform: rotate(90deg);
+}
+
+.specification-viewer__tree-label {
+  font-weight: 500;
+  color: var(--terminal-text);
+}
+
+.specification-viewer__tree-children {
+  margin-left: 24px;
+  border-left: 1px solid rgba(0, 200, 255, 0.15);
+  padding-left: 16px;
+  margin-top: 6px;
+}
+
+/* Clean value display - neutral, readable styling */
+.specification-viewer__key {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.specification-viewer__value {
+  color: rgba(255, 255, 255, 0.75);
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.specification-viewer__value--string {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.specification-viewer__value--number {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.specification-viewer__value--boolean {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.specification-viewer__value--null {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+/* Key styling */
+.specification-viewer__key {
+  color: var(--terminal-primary);
+  font-weight: 500;
+}
+
+.specification-viewer__key::after {
+  content: ':';
+  color: var(--terminal-text);
+  margin-right: 8px;
+}
+
+/* Loading and error states */
+.specification-viewer__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.specification-viewer__error {
+  color: #ff6b6b;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .specification-viewer__content {
+    padding: 20px;
+    padding-top: 60px;
+    font-size: 14px;
+  }
+
+  .specification-viewer__tree-children {
+    margin-left: 15px;
+    padding-left: 10px;
+  }
+
+  .specification-viewer__actions {
+    top: 12px;
+    right: 15px;
+    gap: 6px;
+  }
+
+  .specification-viewer__action-btn {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .specification-viewer__content {
+    padding: 15px;
+    padding-top: 55px;
+    font-size: 13px;
+  }
+
+  .specification-viewer__actions {
+    top: 10px;
+    right: 10px;
+    gap: 4px;
+  }
+
+  .specification-viewer__action-btn {
+    padding: 5px;
+  }
+
+  .specification-viewer__copy-success {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+.specification-viewer__search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.specification-viewer__search-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 4px;
+  color: #00ff41;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.specification-viewer__search-input:focus {
+  outline: none;
+  border-color: #00ff41;
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2);
+}
+
+.specification-viewer__search-input::placeholder {
+  color: rgba(0, 255, 65, 0.5);
+}
+
+.specification-viewer__filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.specification-viewer__filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: rgba(0, 255, 65, 0.8);
+  cursor: pointer;
+  user-select: none;
+}
+
+.specification-viewer__filter input[type='checkbox'] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0, 255, 65, 0.5);
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.specification-viewer__filter input[type='checkbox']:checked {
+  background: #00ff41;
+  border-color: #00ff41;
+}
+
+.specification-viewer__filter input[type='checkbox']:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.specification-viewer__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.specification-viewer__button {
+  padding: 8px 16px;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 4px;
+  color: #00ff41;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.specification-viewer__button:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+}
+
+.specification-viewer__button:active {
+  transform: translateY(1px);
+}
+
+/* Content */
+.specification-viewer__content {
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.specification-viewer__content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.3);
+  border-radius: 4px;
+}
+
+.specification-viewer__content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 65, 0.5);
+}
+
+.specification-viewer__no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(0, 255, 65, 0.6);
+}
+
+/* Spec Node */
+.spec-node {
+  margin: 2px 0;
+}
+
+.spec-node__header {
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.spec-node__header--expandable {
+  cursor: pointer;
+}
+
+.spec-node__header--expandable:hover {
+  background: rgba(0, 255, 65, 0.1);
+}
+
+.spec-node__header:focus {
+  outline: 2px solid rgba(0, 255, 65, 0.5);
+  outline-offset: 2px;
+}
+
+.spec-node__main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
+
+.spec-node__toggle {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 65, 0.7);
+  transition: transform 0.2s ease;
+}
+
+.spec-node__toggle--expanded {
+  transform: rotate(0deg);
+}
+
+.spec-node__type-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(0, 255, 65, 0.6);
+  flex-shrink: 0;
+}
+
+.spec-node__label {
+  font-weight: 500;
+  color: #00ff41;
+  white-space: nowrap;
+}
+
+.spec-node__required {
+  color: #ff4444;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+.spec-node__type {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.spec-node__type--object {
+  color: #ff9800;
+  border-color: #ff9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.spec-node__type--array {
+  color: #9c27b0;
+  border-color: #9c27b0;
+  background: rgba(156, 39, 176, 0.1);
+}
+
+.spec-node__type--string {
+  color: #4caf50;
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.spec-node__type--number {
+  color: #2196f3;
+  border-color: #2196f3;
+  background: rgba(33, 150, 243, 0.1);
+}
+
+.spec-node__type--boolean {
+  color: #f44336;
+  border-color: #f44336;
+  background: rgba(244, 67, 54, 0.1);
+}
+
+.spec-node__type--null {
+  color: #9e9e9e;
+  border-color: #9e9e9e;
+  background: rgba(158, 158, 158, 0.1);
+}
+
+.spec-node__value {
+  font-style: italic;
+  margin-left: auto;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spec-node__value--string {
+  color: #4caf50;
+}
+
+.spec-node__value--number {
+  color: #2196f3;
+}
+
+.spec-node__value--boolean {
+  color: #f44336;
+}
+
+.spec-node__count {
+  color: rgba(0, 255, 65, 0.6);
+  font-size: 0.85rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.spec-node__description {
+  margin-top: 4px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: rgba(0, 255, 65, 0.7);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.spec-node__example {
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: rgba(0, 255, 65, 0.8);
+  border-left: 2px solid rgba(0, 255, 65, 0.5);
+}
+
+.spec-node__example code {
+  color: #ffeb3b;
+  font-family: inherit;
+}
+
+.spec-node__children {
+  margin-left: 0;
+  border-left: 1px solid rgba(0, 255, 65, 0.2);
+  margin-top: 4px;
+}
+
+/* Empty State */
+.specification-viewer--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.specification-viewer__message {
+  text-align: center;
+  color: rgba(0, 255, 65, 0.6);
+  padding: 40px;
+}
+
+.specification-viewer__empty-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  opacity: 0.4;
+}
+
+.specification-viewer__message h3 {
+  margin: 0 0 8px 0;
+  color: rgba(0, 255, 65, 0.8);
+}
+
+.specification-viewer__message p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .specification-viewer__header {
+    padding: 16px;
+  }
+
+  .specification-viewer__title {
+    font-size: 1.25rem;
+  }
+
+  .specification-viewer__controls {
+    padding: 12px 16px;
+  }
+
+  .specification-viewer__content {
+    padding: 4px;
+    max-height: 400px;
+  }
+
+  .spec-node__main {
+    gap: 6px;
+  }
+
+  .spec-node__value {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .specification-viewer__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .specification-viewer__button {
+    text-align: center;
+  }
+
+  .spec-node__header {
+    padding: 4px 8px;
+  }
+
+  .spec-node__type {
+    display: none;
+  }
+
+  .spec-node__value {
+    display: none;
+  }
+}

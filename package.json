@@ -1,0 +1,76 @@
+{
+  "name": "opencli-specification",
+  "version": "1.0.0",
+  "description": "OpenCLI Specification - The industry standard for defining command-line interfaces",
+  "private": true,
+  "homepage": "https://www.openclispec.com",
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^24.0.15",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "gh-pages": "^6.3.0",
+    "prettier": "^2.8.8",
+    "terser": "^5.16.6",
+    "typescript": "^4.9.3",
+    "vite": "^4.5.14",
+    "vite-plugin-pwa": "^0.14.7"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build-check": "tsc --project tsconfig.app.json && vite build",
+    "preview": "vite preview",
+    "lint": "echo 'Skipping lint - ESLint not configured'",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "echo 'Skipping format - Prettier not configured'",
+    "type-check": "tsc --noEmit --project tsconfig.app.json",
+    "clean": "rm -rf dist node_modules/.vite",
+    "serve": "vite preview --port 3000",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "cli",
+    "specification",
+    "yaml",
+    "opencli",
+    "command-line",
+    "documentation",
+    "api",
+    "developer-tools"
+  ],
+  "author": "OpenCLI Working Group",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openclispec/open-cli-specification.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openclispec/open-cli-specification/issues"
+  }
+}
