@@ -2,44 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
-import { copyFileSync, existsSync } from 'fs';
-
-// Custom plugin to ensure static assets are copied
-const copyStaticAssets = () => {
-  return {
-    name: 'copy-static-assets',
-    writeBundle() {
-      const staticAssets = [
-        'terminal-icon.svg',
-        'opencli.yaml',
-        'robots.txt',
-        'sitemap.xml',
-        'sitemap.html',
-        'CNAME',
-        '.nojekyll',
-      ];
-      
-      for (const asset of staticAssets) {
-        const srcPath = resolve(__dirname, 'public', asset);
-        const destPath = resolve(__dirname, 'dist', asset);
-        
-        if (existsSync(srcPath)) {
-          copyFileSync(srcPath, destPath);
-          console.log(`✓ Copied ${asset} to dist/`);
-        } else {
-          console.warn(`⚠ ${asset} not found in public/`);
-        }
-      }
-    }
-  };
-};
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/' : '/',
   plugins: [
     react(),
-    copyStaticAssets(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: [

@@ -30,6 +30,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Debug public directory
+        run: |
+          echo "=== WORKSPACE CONTENTS ==="
+          ls -la
+          echo ""
+          echo "=== PUBLIC DIRECTORY CONTENTS ==="
+          ls -la public/
+          echo ""
+          echo "=== CHECKING SPECIFIC FILES ==="
+          for file in terminal-icon.svg opencli.yaml robots.txt sitemap.xml sitemap.html CNAME .nojekyll; do
+            if [ -f "public/$file" ]; then
+              echo "✓ public/$file exists ($(wc -c < public/$file) bytes)"
+            else
+              echo "✗ public/$file missing"
+            fi
+          done
+
       - name: Build
         run: npm run build
 
