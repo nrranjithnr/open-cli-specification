@@ -41,21 +41,22 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
 
             <p className="home__tagline">
               An open-source YAML specification for building standardized, self-documenting
-              command-line interfaces that are ready for the AI era.
+              command-line interfaces that are ready for the AI era. Just as OpenAPI revolutionized
+              REST APIs, OpenCLI brings consistency and automation to CLI development.
             </p>
 
             <div className="home__hero-stats">
               <div className="home__stat-item">
                 <span className="home__stat-number">v1.0</span>
-                <span className="home__stat-label">First Release</span>
+                <span className="home__stat-label">Stable Release</span>
               </div>
               <div className="home__stat-item">
                 <span className="home__stat-number">Open</span>
-                <span className="home__stat-label">Source Standard</span>
+                <span className="home__stat-label">Source & Free</span>
               </div>
               <div className="home__stat-item">
-                <span className="home__stat-number">YAML</span>
-                <span className="home__stat-label">Schema Based</span>
+                <span className="home__stat-number">AI</span>
+                <span className="home__stat-label">Ready Standard</span>
               </div>
             </div>
 
@@ -86,7 +87,8 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
               <p>
                 Command-line tools are everywhere, but their documentation is fragmented,
                 inconsistent, and impossible for AI systems to understand. Developers waste
-                countless hours on manual documentation that becomes outdated instantly.
+                countless hours writing manual documentation that becomes outdated the moment it's
+                published, while users struggle with inconsistent help formats.
               </p>
               <div className="home__pain-points">
                 <div className="home__pain-point">
@@ -114,8 +116,9 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
               <h2>Enter OpenCLI Specification</h2>
               <p>
                 Just as OpenAPI revolutionized REST APIs, OpenCLI brings standardization to
-                command-line interfaces. One YAML file becomes your single source of truth for
-                documentation, validation, and AI integration.
+                command-line interfaces. Define your CLI once in YAML, then generate help text,
+                completions, validation, documentation, and AI integrations automatically. Your
+                specification becomes the single source of truth.
               </p>
               <div className="home__benefits">
                 <div className="home__benefit">

@@ -10,9 +10,9 @@ interface NavigationProps {
 
 const tabs: { id: TabType; label: string; filename: string }[] = [
   {
-    id: 'home',
-    label: 'Home',
-    filename: 'index.md',
+    id: 'overview',
+    label: 'Overview',
+    filename: 'overview.md',
   },
   {
     id: 'spec',
@@ -20,9 +20,9 @@ const tabs: { id: TabType; label: string; filename: string }[] = [
     filename: 'opencli.yaml',
   },
   {
-    id: 'docs',
-    label: 'Documentation',
-    filename: 'docs.md',
+    id: 'reference',
+    label: 'Reference',
+    filename: 'reference.md',
   },
 ];
 

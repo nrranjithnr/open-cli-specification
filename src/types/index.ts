@@ -113,7 +113,7 @@ export interface AppState {
   expandedNodes: Set<string>;
 }
 
-export type TabType = 'home' | 'spec' | 'docs';
+export type TabType = 'overview' | 'spec' | 'reference';
 
 export interface NavigationTab {
   id: TabType;

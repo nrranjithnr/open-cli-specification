@@ -65,11 +65,11 @@ const LoadingSpinner: React.FC = () => (
 
 // Main App Component
 const App: React.FC = () => {
-  // Initialize activeTab from URL hash or default to 'home'
+  // Initialize activeTab from URL hash or default to 'overview'
   const getInitialTab = (): TabType => {
     const hash = window.location.hash.slice(1); // Remove the '#'
     const pathname = window.location.pathname;
-    const validTabs: TabType[] = ['home', 'spec', 'docs'];
+    const validTabs: TabType[] = ['overview', 'spec', 'reference'];
 
     // Check hash first
     if (hash && validTabs.includes(hash as TabType)) {
@@ -84,7 +84,7 @@ const App: React.FC = () => {
       return pathTab as TabType;
     }
 
-    return 'home';
+    return 'overview';
   };
 
   const [activeTab, setActiveTab] = useState<TabType>(getInitialTab);
@@ -127,11 +127,11 @@ const App: React.FC = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'home':
+      case 'overview':
         return <Home onTabChange={handleTabChange} />;
       case 'spec':
         return <Spec />;
-      case 'docs':
+      case 'reference':
         return <Docs />;
       default:
         return <Home onTabChange={handleTabChange} />;
