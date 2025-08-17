@@ -81,7 +81,8 @@ export const Spec: React.FC<SpecProps> = ({ className = '' }) => {
         <div className="spec__header">
           <h1>OpenCLI Specification</h1>
           <p className="spec__description">
-            The complete YAML specification defining the OpenCLI standard for command-line interfaces.
+            The complete YAML specification defining the OpenCLI standard for command-line
+            interfaces.
           </p>
         </div>
         {renderContent()}

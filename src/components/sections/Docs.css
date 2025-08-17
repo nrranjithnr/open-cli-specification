@@ -239,30 +239,30 @@
   .docs__container {
     padding: 1rem;
   }
-  
+
   .docs__content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .docs__nav {
     position: static;
     max-height: none;
     order: 2;
   }
-  
+
   .docs__main {
     order: 1;
   }
-  
+
   .docs__header h1 {
     font-size: 2rem;
   }
-  
+
   .docs__property-table {
     font-size: 0.85rem;
   }
-  
+
   .docs__property-table th,
   .docs__property-table td {
     padding: 0.75rem;
@@ -273,15 +273,15 @@
   .docs__container {
     padding: 0.5rem;
   }
-  
+
   .docs__header h1 {
     font-size: 1.5rem;
   }
-  
+
   .docs__main {
     padding: 1rem;
   }
-  
+
   .docs__property-table th,
   .docs__property-table td {
     padding: 0.5rem;

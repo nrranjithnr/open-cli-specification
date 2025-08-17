@@ -1,16 +1,15 @@
-/* SpecificationViewer.css - Clean, simple YAML viewer with fixed height */
+/* SpecificationViewer.css - Clean, simple YAML viewer with full height */
 .specification-viewer {
   width: 100%;
-  height: calc(100vh - 200px); /* Fixed height with space for header */
-  min-height: 600px;
-  max-height: 800px;
+  height: 100%;
+  flex: 1;
   background: transparent;
   overflow: hidden;
   font-family: var(--terminal-font);
   color: var(--terminal-text);
   position: relative;
-  border: 1px solid rgba(0, 255, 65, 0.2);
-  border-radius: 8px;
+  border: none;
+  border-radius: 0;
 }
 
 /* Top-right action buttons */
