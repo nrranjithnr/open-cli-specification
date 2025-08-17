@@ -65,9 +65,50 @@ const LoadingSpinner: React.FC = () => (
 
 // Main App Component
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('home');
+  // Initialize activeTab from URL hash or default to 'home'
+  const getInitialTab = (): TabType => {
+    const hash = window.location.hash.slice(1); // Remove the '#'
+    const pathname = window.location.pathname;
+    const validTabs: TabType[] = ['home', 'spec', 'docs'];
+
+    // Check hash first
+    if (hash && validTabs.includes(hash as TabType)) {
+      return hash as TabType;
+    }
+
+    // Check pathname for GitHub Pages redirects (e.g., /spec -> spec tab)
+    const pathTab = pathname.replace(/^\//, '').replace(/\/$/, '');
+    if (pathTab && validTabs.includes(pathTab as TabType)) {
+      // Update hash and return the tab
+      window.location.hash = pathTab;
+      return pathTab as TabType;
+    }
+
+    return 'home';
+  };
+
+  const [activeTab, setActiveTab] = useState<TabType>(getInitialTab);
   const [isLoading, setIsLoading] = useState(true);
   const { isMobile, isTablet } = useResponsive();
+
+  // Handle browser back/forward navigation and hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveTab(getInitialTab());
+    };
+
+    const handlePopState = () => {
+      setActiveTab(getInitialTab());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -79,6 +120,9 @@ const App: React.FC = () => {
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
+
+    // Update URL hash only (simplify routing)
+    window.location.hash = tab;
   };
 
   const renderTabContent = () => {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenCLI Specification</title>
+    <script>
+      // Single Page App (SPA) redirect for GitHub Pages
+      // This script takes the current URL and redirects to the main index.html
+      // while preserving the path as a hash fragment that the app can read
+      const l = window.location;
+      const path = l.pathname.slice(1); // Remove leading slash
+
+      // Map common paths to hash fragments
+      if (path && path !== '') {
+        // Redirect to index.html with path as hash
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            '/#' +
+            path +
+            (l.search || '') +
+            (l.hash || '')
+        );
+      } else {
+        // Just redirect to home
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            '/' +
+            (l.search || '') +
+            (l.hash || '')
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      "
+    >
+      <div style="text-align: center">
+        <h1>Redirecting...</h1>
+        <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>

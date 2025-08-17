@@ -18,6 +18,8 @@ export default defineConfig({
         'opencli.yaml',
         'CNAME',
         '.nojekyll',
+        '_redirects',
+        '404.html',
       ],
       manifest: {
         name: 'OpenCLI Specification',

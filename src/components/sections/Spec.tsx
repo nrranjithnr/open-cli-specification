@@ -61,32 +61,24 @@ export const Spec: React.FC<SpecProps> = ({ className = '' }) => {
     }
 
     return (
-      <div className="spec__content">
-        {/* YAML Viewer - Main and Only Content */}
-        <div className="spec__yaml-container">
-          <SpecificationViewer
-            data={data}
-            className="spec__viewer"
-            onCopyYaml={copyYamlToClipboard}
-            copySuccess={copySuccess}
-          />
-        </div>
-      </div>
+      <SpecificationViewer
+        data={data}
+        className="spec__viewer"
+        onCopyYaml={copyYamlToClipboard}
+        copySuccess={copySuccess}
+      />
     );
   };
 
   return (
     <div className={`spec ${className}`} id="panel-spec" role="tabpanel" aria-labelledby="tab-spec">
-      <div className="spec__container">
-        <div className="spec__header">
-          <h1>OpenCLI Specification</h1>
-          <p className="spec__description">
-            The complete YAML specification defining the OpenCLI standard for command-line
-            interfaces.
-          </p>
-        </div>
-        {renderContent()}
+      <div className="spec__header">
+        <h1>OpenCLI Specification</h1>
+        <p className="spec__description">
+          The complete YAML specification defining the OpenCLI standard for command-line interfaces.
+        </p>
       </div>
+      <div className="spec__main">{renderContent()}</div>
     </div>
   );
 };

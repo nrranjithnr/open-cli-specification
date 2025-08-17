@@ -5,6 +5,10 @@
   --spec-secondary: var(--terminal-secondary);
   --spec-accent: var(--terminal-accent);
 
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
   padding: 0;
   background: linear-gradient(
     135deg,
@@ -16,8 +20,7 @@
   );
   color: var(--spec-text);
   font-family: var(--terminal-font);
-  min-height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 /* Compact Header Section */
@@ -35,37 +38,8 @@
   flex-shrink: 0;
 }
 
-.spec__header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: linear-gradient(rgba(0, 200, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 200, 255, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.spec__header-content {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-  gap: 25px;
-}
-
-.spec__title-section {
-  flex: 1;
-}
-
-.spec__title {
-  font-size: 2rem;
+.spec__header h1 {
+  font-size: 1.8rem;
   font-weight: 600;
   margin: 0 0 8px 0;
   background: linear-gradient(135deg, #00c8ff 0%, #00ff41 100%);
@@ -74,29 +48,31 @@
   -webkit-text-fill-color: transparent;
 }
 
-.spec__meta {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.spec__version {
-  background: linear-gradient(135deg, var(--spec-primary), var(--spec-secondary));
-  color: #000;
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.spec__type {
+.spec__description {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Main Content Area */
+.spec__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Important for flex children to shrink */
+  width: 100%;
+}
+
+/* YAML Viewer - Full Width and Height */
+.spec__viewer {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: var(--terminal-bg);
+  overflow: auto; /* Enable both horizontal and vertical scrolling */
 }
 
 .spec__actions {
@@ -104,41 +80,6 @@
   gap: 15px;
   align-items: center;
   flex-shrink: 0;
-}
-
-/* YAML Section - First Priority */
-.spec__yaml-section {
-  padding: 0;
-  background: transparent;
-}
-
-/* YAML Container - Main Content Focus (Maximum Width & Height) */
-.spec__yaml-container {
-  padding: 10px 0;
-  max-width: none;
-  margin: 0;
-  position: relative;
-  width: 100%;
-}
-
-/* Clean YAML viewer - Optimal height and scrolling */
-.spec__yaml-container .spec__viewer {
-  width: calc(100% - 20px);
-  margin: 0 10px;
-  height: 70vh;
-  max-height: 600px;
-  min-height: 400px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 200, 255, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-}
-
-/* Main Content Section */
-.spec__main {
-  padding: 0;
 }
 
 .spec__loading {
@@ -235,29 +176,6 @@
   font-size: 28px;
   color: var(--spec-text);
   font-weight: 600;
-}
-
-.spec__content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  gap: 0;
-  height: 100%;
-}
-
-.spec__yaml-container {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.spec__viewer {
-  flex: 1;
-  height: 100%;
-  width: 100%;
 }
 
 .spec__info {
