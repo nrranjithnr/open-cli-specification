@@ -6,9 +6,9 @@
 [![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/openclispec/open-cli-specification)
 [![OpenCLI](https://img.shields.io/badge/OpenCLI-1.0.0-orange.svg)](https://github.com/openclispec/open-cli-specification)
 
-> **Transform your CLI development workflow with the first standardized specification for command-line interfaces.**
+> **A standardized specification for command-line interface documentation and automation.**
 
-Just as OpenAPI revolutionized REST API documentation, **OpenCLI Specification** brings the same clarity, consistency, and tooling ecosystem to command-line interfaces. Build better CLIs, enable AI automation, and create seamless developer experiences.
+Inspired by the success of OpenAPI for REST APIs, **OpenCLI Specification** aims to bring similar clarity, consistency, and tooling potential to command-line interfaces. This specification enables better CLI development, AI integration, and developer experiences.
 
 ---
 
@@ -49,10 +49,10 @@ In today's automated development world, command-line tools are everywhere—but 
 ### **After OpenCLI:**
 
 - ✅ **Standardized YAML specifications** for all CLIs
-- ✅ **Auto-generated documentation** and help text
-- ✅ **AI-readable CLI definitions** for automation
-- ✅ **Rich ecosystem** of compatible tools
-- ✅ **Rapid CLI development** with code generation
+- ✅ **Foundation for auto-generated documentation** and help text
+- ✅ **AI-readable CLI definitions** for future automation
+- ✅ **Framework for a rich ecosystem** of compatible tools
+- ✅ **Potential for rapid CLI development** with code generation
 
 ---
 
@@ -76,7 +76,7 @@ commands:
         description: 'Enable verbose output'
 ```
 
-**Get instantly:**
+**Future capabilities:**
 
 - Interactive help documentation
 - Shell completion scripts
@@ -86,12 +86,16 @@ commands:
 ### **🤖 AI & MCP Developers**
 
 ```typescript
-// Auto-generated MCP server from OpenCLI spec
-const mcpServer = generateMCPFromOpenCLI('myapp.yaml');
-// AI can now understand and use your CLI automatically
+// Future vision: Auto-generated MCP server from OpenCLI spec
+// const mcpServer = generateMCPFromOpenCLI('myapp.yaml');
+// AI will be able to understand and use your CLI automatically
+
+// Current: Manual MCP integration using OpenCLI spec structure
+const cliSpec = loadOpenCLISpec('myapp.yaml');
+const mcpTools = convertToMCPTools(cliSpec);
 ```
 
-**Enable:**
+**Vision for:**
 
 - Natural language to CLI command translation
 - Automated workflow generation
@@ -274,47 +278,47 @@ commands:
         description: 'Show help'
 ```
 
-### **2. Validate & Generate**
+### **2. Validate & Document**
 
 ```bash
-# Validate your specification
-opencli validate my-cli.yaml
+# This specification enables (future tools will provide):
+# - Specification validation
+# - Documentation generation
+# - Shell completion generation
+# - Code scaffolding
 
-# Generate documentation
-opencli generate docs my-cli.yaml
-
-# Generate shell completion
-opencli generate completion my-cli.yaml --shell bash
+# For now, manually validate against the schema:
+# View the full specification at opencli.yaml
 ```
 
-### **3. Deploy & Use**
+### **3. Implement & Use**
 
 ```bash
-# Your CLI now has:
-mycli --help                    # Auto-generated help
-mycli <TAB>                     # Shell completion
-mycli command --<TAB>           # Parameter completion
+# Implement your CLI following the OpenCLI specification
+# Your CLI will be ready for future OpenCLI tooling:
+mycli --help                    # Standard help output
+mycli command --param value     # Consistent parameter handling
 ```
 
 ---
 
-## 🛠️ **Ecosystem & Tools**
+## 🛠️ **Future Ecosystem & Vision**
 
-### **🔄 Code Generation**
+### **🔄 Planned Code Generation**
 
 - **CLI Frameworks**: Generate scaffolding for Go, Python, Node.js, Rust
 - **Documentation**: Auto-generate README, man pages, websites
 - **Shell Completion**: bash, zsh, fish, PowerShell support
 - **Test Suites**: Generate comprehensive test cases
 
-### **🤖 AI Integration**
+### **🤖 AI Integration Vision**
 
 - **MCP Servers**: Convert specs to Model Context Protocol
 - **AI Training**: Structured data for CLI understanding
 - **Code Assistants**: AI-powered CLI development
 - **Natural Language**: Convert speech to CLI commands
 
-### **✅ Validation & Testing**
+### **✅ Validation & Testing Goals**
 
 - **Spec Validation**: Ensure specifications are correct
 - **CLI Testing**: Automated testing from specs
@@ -332,12 +336,12 @@ mycli command --<TAB>           # Parameter completion
 - **Unified documentation** standards
 - **Cross-team collaboration** improvement
 
-### **⚡ Productivity**
+### **⚡ Future Productivity**
 
-- **Faster CLI development** with code generation
-- **Automated testing** from specifications
-- **Instant documentation** updates
-- **Reduced maintenance** overhead
+- **Faster CLI development** with planned code generation
+- **Automated testing** from specifications (roadmap)
+- **Instant documentation** updates (planned)
+- **Reduced maintenance** through standardization
 
 ### **🔒 Governance**
 
@@ -352,39 +356,23 @@ mycli command --<TAB>           # Parameter completion
 
 ### **🤝 Join the Movement**
 
-- **1000+** developers already using OpenCLI
-- **50+** CLI tools documented with OpenCLI
-- **Active community** of contributors and users
+- **Growing community** of CLI developers and specification enthusiasts
+- **Open source** specification ready for community contributions
+- **Early adoption** phase - help shape the future of CLI development
 
 ### **💬 Get Involved**
 
-- **[Discord Community](https://discord.com/channels/1406539438787661854/1406539546568425502)** - Real-time discussion
-- **[GitHub Discussions](https://github.com/openclispec/open-cli-specification/discussions)** - Spec evolution
-- **[GitHub Issues](https://github.com/openclispec/open-cli-specification/issues)** - Bug reports & features
-- **Stack Overflow** - Tag your questions with `opencli`
+- **[GitHub Discussions](https://github.com/openclispec/open-cli-specification/discussions)** - Spec evolution and community discussion
+- **[GitHub Issues](https://github.com/openclispec/open-cli-specification/issues)** - Bug reports, features, and feedback
 
 ### **📚 Resources**
 
-- **[Full Specification](https://github.com/openclispec/open-cli-specification/blob/main/public/opencli.yaml)** - Complete YAML schema
-- **[Migration Guide](#)** - Convert existing CLIs to OpenCLI
-- **[Best Practices](#)** - Industry recommendations
-- **[Examples Repository](#)** - Real-world specifications
-
----
-
-## 🎉 **Success Stories**
-
-### **"OpenCLI transformed our CLI development workflow"**
-
-> _"We reduced CLI development time by 60% and improved consistency across 20+ tools. The auto-generated documentation alone saved us weeks of work."_
->
-> **— Sarah Chen, Platform Engineering Lead @ TechCorp**
-
-### **"AI integration became trivial"**
-
-> _"With OpenCLI specs, our AI assistant can now understand and generate commands for any of our internal tools. It's like having API documentation for CLIs."_
->
-> **— Marcus Rodriguez, DevOps Architect @ CloudFirst**
+- **[Full Specification](https://www.openclispec.com/#/spec)** - Complete YAML schema and documentation
+- **[Interactive Viewer](https://www.openclispec.com)** - Explore the specification online
+  <!-- Future resources as the project grows:
+  - **[Migration Guide](#)** - Convert existing CLIs to OpenCLI
+  - **[Best Practices](#)** - Industry recommendations
+  - **[Examples Repository](#)** - Real-world specifications -->
 
 ---
 
@@ -394,9 +382,9 @@ mycli command --<TAB>           # Parameter completion
 
 ### **Choose Your Path:**
 
-[![View Full Specification](https://img.shields.io/badge/📖_View_Specification-blue?style=for-the-badge)](https://github.com/openclispec/open-cli-specification/blob/main/public/opencli.yaml)
-[![Explore Examples](https://img.shields.io/badge/🔍_Explore_Examples-green?style=for-the-badge)](#examples)
-[![Join Discord](https://img.shields.io/badge/💬_Join_Discord-purple?style=for-the-badge)](https://discord.com/channels/1406539438787661854/1406539546568425502)
+[![View Full Specification](https://img.shields.io/badge/📖_View_Specification-blue?style=for-the-badge)](https://www.openclispec.com/#/spec)
+[![Explore Examples](https://img.shields.io/badge/🔍_Explore_Examples-green?style=for-the-badge)](https://www.openclispec.com)
+[![GitHub Repository](https://img.shields.io/badge/⭐_GitHub_Repository-black?style=for-the-badge)](https://github.com/openclispec/open-cli-specification)
 
 </div>
 
