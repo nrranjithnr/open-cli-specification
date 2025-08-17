@@ -1,0 +1,376 @@
+/* Global CSS Variables */
+:root {
+  /* Colors */
+  --primary-color: #00ff41;
+  --secondary-color: #00cc33;
+  --background-color: #0a0a0a;
+  --surface-color: #1a1a1a;
+  --surface-secondary: #2a2a2a;
+  --text-color: #00ff41;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --accent-color: #ffff99;
+  --error-color: #ff5f56;
+  --warning-color: #ffbd2e;
+  --success-color: #27ca3f;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 255, 65, 0.3);
+
+  /* Typography */
+  --font-mono: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-modal: 1500;
+  --z-tooltip: 2000;
+
+  /* Layout */
+  --header-height: 100px;
+  --title-bar-height: 40px;
+  --nav-height: 60px;
+  --container-max-width: 1400px;
+
+  /* Terminal-specific variables */
+  --terminal-bg: var(--background-color);
+  --terminal-text: var(--text-color);
+  --terminal-text-secondary: var(--text-secondary);
+  --terminal-text-muted: var(--text-muted);
+  --terminal-text-dim: var(--text-muted);
+  --terminal-primary: var(--primary-color);
+  --terminal-secondary: var(--secondary-color);
+  --terminal-accent: var(--accent-color);
+  --terminal-font: var(--font-mono);
+  --terminal-muted: var(--text-muted);
+  --terminal-chrome: #1e1e1e;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+a:hover {
+  border-bottom: 1px solid var(--text-color);
+  text-shadow: 0 0 5px var(--shadow-color);
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-color);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error states */
+.error-message {
+  color: var(--error-color);
+  background: rgba(255, 95, 86, 0.1);
+  border: 1px solid var(--error-color);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.warning-message {
+  color: var(--warning-color);
+  background: rgba(255, 189, 46, 0.1);
+  border: 1px solid var(--warning-color);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.success-message {
+  color: var(--success-color);
+  background: rgba(39, 202, 63, 0.1);
+  border: 1px solid var(--success-color);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --shadow-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .terminal-window {
+    border-width: 3px;
+  }
+
+  .nav-tab {
+    border-width: 2px;
+  }
+
+  .yaml-key,
+  .section-title {
+    font-weight: 900;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+  :root {
+    --background-color: white;
+    --surface-color: #f0f0f0;
+    --text-color: black;
+    --text-secondary: #333;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .terminal-window {
+    border: 1px solid black;
+    box-shadow: none;
+  }
+
+  .yaml-line {
+    color: black !important;
+  }
+
+  .yaml-key,
+  .yaml-value,
+  .yaml-string,
+  .yaml-number {
+    color: black !important;
+  }
+}
+
+/* Dark mode (default) - already defined above */
+/* Light mode for future implementation */
+@media (prefers-color-scheme: light) {
+  /* Keep dark theme as default for terminal aesthetic */
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 170px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 160px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 150px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-xs);
+  }
+}
+
+/* Touch device optimizations */
+.touch-device button,
+.touch-device a,
+.touch-device [role='button'] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+/* Firefox scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color) var(--surface-color);
+}
