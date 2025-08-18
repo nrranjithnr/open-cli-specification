@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { loadYamlSpec } from '../utils/yamlUtils';
 import * as yaml from 'js-yaml';
 import type { OpenCLISpec } from '../types';
@@ -9,10 +9,11 @@ interface UseYamlSpecResult {
   error: string | null;
   refreshSpec: () => Promise<void>;
   parseYamlString: (yamlString: string) => any;
+  isValidSpec: boolean;
 }
 
 /**
- * Hook to load and manage YAML specification data
+ * Enhanced hook to load and manage YAML specification data with caching
  */
 export function useYamlSpec(url: string = '/opencli.yaml'): UseYamlSpecResult {
   const [data, setData] = useState<OpenCLISpec | null>(null);
@@ -20,7 +21,12 @@ export function useYamlSpec(url: string = '/opencli.yaml'): UseYamlSpecResult {
   const [error, setError] = useState<string | null>(null);
 
   const parseYamlString = useCallback((yamlString: string) => {
-    return yaml.load(yamlString);
+    try {
+      return yaml.load(yamlString);
+    } catch (err) {
+      console.error('YAML parsing error:', err);
+      throw err;
+    }
   }, []);
 
   const refreshSpec = useCallback(async () => {
@@ -38,6 +44,19 @@ export function useYamlSpec(url: string = '/opencli.yaml'): UseYamlSpecResult {
     }
   }, [url]);
 
+  const isValidSpec = useMemo(() => {
+    if (!data) return false;
+
+    // Basic validation - check required fields
+    return !!(
+      data.opencli &&
+      data.info?.title &&
+      data.info?.version &&
+      data.commands &&
+      typeof data.commands === 'object'
+    );
+  }, [data]);
+
   useEffect(() => {
     refreshSpec();
   }, [refreshSpec]);
@@ -48,5 +67,6 @@ export function useYamlSpec(url: string = '/opencli.yaml'): UseYamlSpecResult {
     error,
     refreshSpec,
     parseYamlString,
+    isValidSpec,
   };
 }

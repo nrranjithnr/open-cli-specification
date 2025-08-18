@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../ui/Button';
 import './Home.css';
 
 interface HomeProps {
@@ -61,13 +62,18 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
             </div>
 
             <div className="home__hero-actions">
-              <button className="home__cta-primary" onClick={handleViewSpec}>
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handleViewSpec}
+                className="home__cta-primary"
+              >
                 <span className="home__cta-icon">🚀</span>
                 Explore Specification
-              </button>
+              </Button>
               <a
                 href="https://github.com/openclispec/open-cli-specification"
-                className="home__cta-secondary"
+                className="home__cta-secondary btn btn--outline btn--lg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -276,13 +282,15 @@ commands:
             <p>Join the community building the next generation of command-line tools</p>
 
             <div className="home__cta-actions">
-              <button
-                className="home__cta-primary home__cta-primary--large"
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={handleViewSpec}
+                className="home__cta-primary--large"
               >
                 <span className="home__cta-icon">📖</span>
                 View Full Specification
-              </button>
+              </Button>
 
               <div className="home__cta-links">
                 <a

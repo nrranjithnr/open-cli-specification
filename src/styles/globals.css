@@ -1,3 +1,7 @@
+/* Import design system first */
+@import './design-system.css';
+@import './utilities.css';
+
 /* Global CSS Variables */
 :root {
   /* Colors */

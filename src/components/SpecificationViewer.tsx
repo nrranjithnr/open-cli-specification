@@ -1,139 +1,15 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import {
+  ChevronRightIcon,
+  CopyIcon,
+  DownloadIcon,
+  ExpandIcon,
+  CollapseIcon,
+  TreeViewIcon,
+  CodeViewIcon,
+  JsonViewIcon,
+} from './icons';
 import './SpecificationViewer.css';
-
-// Simple chevron icon for expand/collapse
-const ChevronRightIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="9,18 15,12 9,6" />
-  </svg>
-);
-
-// Copy icon
-const CopyIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-  </svg>
-);
-
-// Download icon
-const DownloadIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7,10 12,15 17,10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-// Expand All icon
-const ExpandAllIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="7,13 12,18 17,13" />
-    <polyline points="7,6 12,11 17,6" />
-  </svg>
-);
-
-// Collapse All icon
-const CollapseAllIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="17,11 12,6 7,11" />
-    <polyline points="17,18 12,13 7,18" />
-  </svg>
-);
-
-// Tree view icon
-const TreeViewIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <path d="M8 6h13" />
-    <path d="M8 12h13" />
-    <path d="M8 18h13" />
-    <path d="M3 6h.01" />
-    <path d="M3 12h.01" />
-    <path d="M3 18h.01" />
-  </svg>
-);
-
-// Code view icon
-const CodeViewIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="16,18 22,12 16,6" />
-    <polyline points="8,6 2,12 8,18" />
-  </svg>
-);
-
-// JSON view icon
-const JsonViewIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
-    <path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-    <path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
-    <path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2" />
-  </svg>
-);
 
 type ViewMode = 'tree' | 'code' | 'json';
 
@@ -392,7 +268,7 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
             title="Tree view"
             type="button"
           >
-            <TreeViewIcon />
+            <TreeViewIcon size={18} />
             <span>Tree</span>
           </button>
           <button
@@ -403,7 +279,7 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
             title="Code view (YAML)"
             type="button"
           >
-            <CodeViewIcon />
+            <CodeViewIcon size={18} />
             <span>YAML</span>
           </button>
           <button
@@ -414,7 +290,7 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
             title="JSON view"
             type="button"
           >
-            <JsonViewIcon />
+            <JsonViewIcon size={18} />
             <span>JSON</span>
           </button>
         </div>
@@ -430,7 +306,7 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
                 title="Expand all nodes"
                 type="button"
               >
-                <ExpandAllIcon />
+                <ExpandIcon size={18} />
               </button>
               <button
                 className="specification-viewer__action-btn"
@@ -438,7 +314,7 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
                 title="Collapse all nodes"
                 type="button"
               >
-                <CollapseAllIcon />
+                <CollapseIcon size={18} />
               </button>
             </>
           )}

@@ -1,0 +1,92 @@
+/* Card Component Styles */
+.card {
+  background: var(--surface-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+/* Variants */
+.card--default {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.card--outlined {
+  background: transparent;
+  border: 2px solid var(--border-color);
+}
+
+.card--elevated {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card--elevated:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Padding */
+.card--padding-none {
+  padding: 0;
+}
+
+.card--padding-sm {
+  padding: 0.75rem;
+}
+
+.card--padding-md {
+  padding: 1.5rem;
+}
+
+.card--padding-lg {
+  padding: 2rem;
+}
+
+/* Card sections */
+.card__header {
+  padding: 1.5rem 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.card--padding-none .card__header {
+  padding: 1.5rem;
+  margin-bottom: 0;
+}
+
+.card__content {
+  flex: 1;
+}
+
+.card__footer {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+}
+
+.card--padding-none .card__footer {
+  padding: 1.5rem;
+  margin-top: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card--padding-lg {
+    padding: 1.5rem;
+  }
+
+  .card__header,
+  .card--padding-none .card__header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card__footer,
+  .card--padding-none .card__footer {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+}

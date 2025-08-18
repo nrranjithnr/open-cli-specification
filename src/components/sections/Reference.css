@@ -1,0 +1,241 @@
+/* Reference Component Styles */
+.reference {
+  --reference-bg: var(--terminal-bg);
+  --reference-text: var(--terminal-text);
+  --reference-primary: var(--terminal-primary);
+  --reference-secondary: var(--terminal-secondary);
+  --reference-accent: var(--terminal-accent);
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #111111 25%,
+    #0a0a0a 50%,
+    #151515 75%,
+    #0a0a0a 100%
+  );
+  color: var(--reference-text);
+  font-family: var(--terminal-font);
+  overflow: hidden;
+}
+
+/* Enhanced Header Section - Matching Spec page */
+.reference__header {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 200, 255, 0.08) 0%,
+    rgba(0, 255, 65, 0.06) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  padding: 20px 30px;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.reference__header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300c8ff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    repeat;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.reference__header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.reference__title-section {
+  flex: 1;
+}
+
+.reference .reference__header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #00c8ff;
+  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.reference__description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Version Badge - Inline with title */
+.reference__version-badge {
+  display: inline-block;
+  margin-left: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  /* Override h1 gradient inheritance - use solid color */
+  color: #00ff41 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #00ff41 !important;
+  font-family: var(--font-mono, 'Menlo', 'Monaco', 'Consolas', monospace);
+  backdrop-filter: blur(10px);
+  vertical-align: middle;
+}
+
+/* Main Content Area */
+.reference__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Layout - Fixed height with scrollable areas */
+.reference__layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Main Content - Left Side Scrollable */
+.reference__content {
+  padding: 2rem;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(0, 200, 255, 0.1);
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for content */
+.reference__content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reference__content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.reference__content::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 4px;
+}
+
+.reference__content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 200, 255, 0.5);
+}
+
+/* Navigation - Right Side Fixed and Scrollable */
+.reference__navigation {
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 1px solid rgba(0, 200, 255, 0.1);
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for navigation */
+.reference__navigation::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reference__navigation::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.reference__navigation::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 3px;
+}
+
+.reference__navigation::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 200, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .reference__layout {
+    grid-template-columns: 1fr 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .reference__layout {
+    display: block;
+    height: auto;
+  }
+
+  .reference__content {
+    height: 60vh;
+    margin-bottom: 1rem;
+  }
+
+  .reference__navigation {
+    height: 40vh;
+    border-left: none;
+    border-top: 1px solid rgba(0, 200, 255, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .reference__header {
+    padding: 15px 15px;
+  }
+
+  .reference .reference__header h1 {
+    font-size: 1.5rem;
+  }
+
+  .reference__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .reference__content {
+    padding: 1rem;
+    height: 50vh;
+  }
+
+  .reference__navigation {
+    padding: 1rem;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .reference .reference__header h1 {
+    font-size: 1.3rem;
+  }
+
+  .reference__version-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    margin-left: 8px;
+    font-weight: 700;
+  }
+}
