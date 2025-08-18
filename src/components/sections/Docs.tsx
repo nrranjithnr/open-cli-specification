@@ -1270,35 +1270,51 @@ url: "https://example.com/project/license.txt"`}</pre>
             <section id="section-command-responses" className="docs__section">
               <h2>commands.{`command`}.responses</h2>
               <p>
-                Defines the possible responses from the command, including success and error
-                scenarios. Each response includes a description and optional content schema.
+                Defines the possible command outputs and exit codes. CLI responses use exit codes 
+                (0 for success, non-zero for errors) and can include both human-readable text 
+                and structured data outputs.
               </p>
 
               <div className="docs__example">
                 <h3>Example</h3>
                 <pre>
                   <code>{`commands:
-  /deploy:
+  /validate:
     responses:
-      '200':
-        description: "Deployment completed successfully"
+      '0':
+        description: "Validation successful"
         content:
+          text/plain:
+            example: |
+              ✓ Validation successful
+              No errors found in opencli.yaml
           application/json:
             schema:
               type: "object"
               properties:
-                status:
+                valid:
+                  type: "boolean"
+                file:
                   type: "string"
-                deploymentId:
-                  type: "string"
-      '400':
-        description: "Invalid deployment configuration"`}</code>
+                errors:
+                  type: "array"
+                  items:
+                    type: "string"
+      '1':
+        description: "Validation failed"
+        content:
+          text/plain:
+            example: |
+              ✗ Validation failed
+              Found 2 errors in opencli.yaml:
+                - Line 5: Missing required field 'operationId'
+                - Line 12: Invalid enum value 'invalid-type'`}</code>
                 </pre>
                 <button
                   className="docs__copy-btn"
                   onClick={() =>
                     navigator.clipboard.writeText(
-                      `commands:\n  /deploy:\n    responses:\n      '200':\n        description: "Deployment completed successfully"\n        content:\n          application/json:\n            schema:\n              type: "object"\n              properties:\n                status:\n                  type: "string"\n                deploymentId:\n                  type: "string"\n      '400':\n        description: "Invalid deployment configuration"`
+                      `commands:\n  /validate:\n    responses:\n      '0':\n        description: "Validation successful"\n        content:\n          text/plain:\n            example: |\n              ✓ Validation successful\n              No errors found in opencli.yaml\n          application/json:\n            schema:\n              type: "object"\n              properties:\n                valid:\n                  type: "boolean"\n                file:\n                  type: "string"\n                errors:\n                  type: "array"\n                  items:\n                    type: "string"\n      '1':\n        description: "Validation failed"\n        content:\n          text/plain:\n            example: |\n              ✗ Validation failed\n              Found 2 errors in opencli.yaml:\n                - Line 5: Missing required field 'operationId'\n                - Line 12: Invalid enum value 'invalid-type'`
                     )
                   }
                   title="Copy to clipboard"
@@ -1319,16 +1335,18 @@ url: "https://example.com/project/license.txt"`}</pre>
                 <h3>Example</h3>
                 <pre>
                   <code>{`responses:
-  '200':
-    description: "Command executed successfully"
-  '404':
-    description: "Requested resource not found"`}</code>
+  '0':
+    description: "Validation successful"
+  '1':
+    description: "Validation failed"
+  '2':
+    description: "File not found or not readable"`}</code>
                 </pre>
                 <button
                   className="docs__copy-btn"
                   onClick={() =>
                     navigator.clipboard.writeText(
-                      `responses:\n  '200':\n    description: "Command executed successfully"\n  '404':\n    description: "Requested resource not found"`
+                      `responses:\n  '0':\n    description: "Validation successful"\n  '1':\n    description: "Validation failed"\n  '2':\n    description: "File not found or not readable"`
                     )
                   }
                   title="Copy to clipboard"
@@ -1349,25 +1367,30 @@ url: "https://example.com/project/license.txt"`}</pre>
                 <h3>Example</h3>
                 <pre>
                   <code>{`responses:
-  '200':
+  '0':
     content:
+      text/plain:
+        example: |
+          ✓ Validation successful
+          No errors found in opencli.yaml
       application/json:
         schema:
           type: "object"
           properties:
-            message:
+            valid:
+              type: "boolean"
+            file:
               type: "string"
-            data:
+            errors:
               type: "array"
-      text/plain:
-        schema:
-          type: "string"`}</code>
+              items:
+                type: "string"`}</code>
                 </pre>
                 <button
                   className="docs__copy-btn"
                   onClick={() =>
                     navigator.clipboard.writeText(
-                      `responses:\n  '200':\n    content:\n      application/json:\n        schema:\n          type: "object"\n          properties:\n            message:\n              type: "string"\n            data:\n              type: "array"\n      text/plain:\n        schema:\n          type: "string"`
+                      `responses:\n  '0':\n    content:\n      text/plain:\n        example: |\n          ✓ Validation successful\n          No errors found in opencli.yaml\n      application/json:\n        schema:\n          type: "object"\n          properties:\n            valid:\n              type: "boolean"\n            file:\n              type: "string"\n            errors:\n              type: "array"\n              items:\n                type: "string"`
                     )
                   }
                   title="Copy to clipboard"
@@ -1999,32 +2022,37 @@ url: "https://example.com/project/license.txt"`}</pre>
                 <pre>
                   <code>{`components:
   responses:
-    Success:
-      description: "Operation completed successfully"
-      content:
-        application/json:
-          schema:
-            type: "object"
-            properties:
-              message:
-                type: "string"
-              status:
-                type: "string"
-                enum: ["success"]
-    NotFound:
-      description: "Resource not found"
+    FileNotFound:
+      description: "File not found or not readable"
       content:
         text/plain:
-          example: "Resource not found"
+          example: |
+            ✗ Error: File not found
+            Could not read the specified file
+            Please check the file path and permissions
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"`}</code>
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 2
+            message: "File not found"
+            details: "Could not read the specified file"
+    ValidationSuccess:
+      description: "Validation completed successfully"
+      content:
+        text/plain:
+          example: |
+            ✓ Validation successful
+            No errors found in opencli.yaml
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ValidationResult"`}</code>
                 </pre>
                 <button
                   className="docs__copy-btn"
                   onClick={() =>
                     navigator.clipboard.writeText(
-                      `components:\n  responses:\n    Success:\n      description: "Operation completed successfully"\n      content:\n        application/json:\n          schema:\n            type: "object"\n            properties:\n              message:\n                type: "string"\n              status:\n                type: "string"\n                enum: ["success"]\n    NotFound:\n      description: "Resource not found"\n      content:\n        text/plain:\n          example: "Resource not found"\n        application/json:\n          schema:\n            $ref: "#/components/schemas/Error"`
+                      `components:\n  responses:\n    FileNotFound:\n      description: "File not found or not readable"\n      content:\n        text/plain:\n          example: |\n            ✗ Error: File not found\n            Could not read the specified file\n            Please check the file path and permissions\n        application/json:\n          schema:\n            $ref: "#/components/schemas/Error"\n          example:\n            code: 2\n            message: "File not found"\n            details: "Could not read the specified file"\n    ValidationSuccess:\n      description: "Validation completed successfully"\n      content:\n        text/plain:\n          example: |\n            ✓ Validation successful\n            No errors found in opencli.yaml\n        application/json:\n          schema:\n            $ref: "#/components/schemas/ValidationResult"`
                     )
                   }
                   title="Copy to clipboard"
