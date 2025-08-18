@@ -113,7 +113,7 @@ export interface AppState {
   expandedNodes: Set<string>;
 }
 
-export type TabType = 'home' | 'spec';
+export type TabType = 'overview' | 'spec' | 'reference';
 
 export interface NavigationTab {
   id: TabType;
@@ -123,22 +123,9 @@ export interface NavigationTab {
 }
 
 // Component Props Types
-export interface TerminalWindowProps {
-  title: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
 export interface NavigationTabsProps {
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
-}
-
-export interface SectionProps {
-  id: string;
-  title: string;
-  isActive: boolean;
-  children: React.ReactNode;
 }
 
 // Utility Types

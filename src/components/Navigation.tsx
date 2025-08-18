@@ -10,14 +10,19 @@ interface NavigationProps {
 
 const tabs: { id: TabType; label: string; filename: string }[] = [
   {
-    id: 'home',
-    label: 'Home',
-    filename: 'index.md',
+    id: 'overview',
+    label: 'Overview',
+    filename: 'overview.md',
   },
   {
     id: 'spec',
     label: 'Specification',
     filename: 'opencli.yaml',
+  },
+  {
+    id: 'reference',
+    label: 'Reference',
+    filename: 'reference.md',
   },
 ];
 

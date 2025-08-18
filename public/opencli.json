@@ -1,0 +1,867 @@
+{
+  "opencli": "1.0.0",
+  "info": {
+    "title": "Open Command-Line Interface Specification",
+    "description": "Standard for defining command-line interfaces",
+    "version": "1.0.0",
+    "contact": {
+      "name": "OpenCLI Working Group",
+      "url": "https://github.com/openclispec/open-cli-specification"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about OpenCLI",
+    "url": "https://www.openclispec.com"
+  },
+  "platforms": [
+    {
+      "name": "linux",
+      "architectures": [
+        "amd64",
+        "arm64"
+      ]
+    },
+    {
+      "name": "darwin",
+      "architectures": [
+        "amd64",
+        "arm64"
+      ]
+    },
+    {
+      "name": "windows",
+      "architectures": [
+        "amd64",
+        "arm64"
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "name": "OCS_CONFIG_PATH",
+      "description": "Override default configuration file path"
+    },
+    {
+      "name": "OCS_VERBOSE",
+      "description": "Enable verbose output globally"
+    },
+    {
+      "name": "OCS_QUIET",
+      "description": "Suppress non-essential output globally"
+    }
+  ],
+  "tags": [
+    {
+      "name": "core",
+      "description": "Core commands and utilities"
+    },
+    {
+      "name": "data",
+      "description": "Data processing commands"
+    },
+    {
+      "name": "auth",
+      "description": "Authentication and user management"
+    },
+    {
+      "name": "system",
+      "description": "System-level commands and utilities"
+    }
+  ],
+  "commands": {
+    "ocs": {
+      "summary": "Open CLI Spec tool",
+      "description": "Main entry point for the Open CLI Specification tool",
+      "operationId": "rootCommand",
+      "aliases": [
+        "opencli"
+      ],
+      "tags": [
+        "core"
+      ],
+      "parameters": [
+        {
+          "name": "config",
+          "alias": [
+            "c"
+          ],
+          "description": "Path to configuration file",
+          "scope": "inherited",
+          "schema": {
+            "type": "string",
+            "format": "path",
+            "example": "~/.config/ocs/config.yaml"
+          }
+        },
+        {
+          "name": "verbose",
+          "in": "flag",
+          "alias": [
+            "v"
+          ],
+          "description": "Enable verbose output",
+          "scope": "inherited",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        {
+          "name": "quiet",
+          "in": "flag",
+          "alias": [
+            "q"
+          ],
+          "description": "Suppress non-essential output",
+          "scope": "inherited",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        {
+          "name": "version",
+          "in": "flag",
+          "alias": [
+            "V"
+          ],
+          "description": "Show CLI version",
+          "scope": "local",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "help",
+          "in": "flag",
+          "alias": [
+            "h"
+          ],
+          "description": "Show help information",
+          "scope": "local",
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      ],
+      "responses": {
+        "0": {
+          "description": "Version information displayed",
+          "content": {
+            "text/plain": {
+              "example": "ocs v1.0.0\nOpenCLI Specification v1.0.0\nPlatform: linux-amd64\n\nUsage: ocs [command] [flags]\n\nAvailable Commands:\n  validate    Validate CLI specification files\n  generate    Generate CLI code from specification\n  lint        Lint CLI specification files\n  \nUse \"ocs [command] --help\" for more information about a command.\n"
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cli_version": {
+                    "type": "string"
+                  },
+                  "spec_version": {
+                    "type": "string"
+                  },
+                  "platform": {
+                    "type": "string"
+                  },
+                  "commands": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "cli_version": "1.0.0",
+                "spec_version": "1.0.0",
+                "platform": "linux-amd64",
+                "commands": [
+                  {
+                    "name": "validate",
+                    "description": "Validate CLI specification files"
+                  },
+                  {
+                    "name": "generate",
+                    "description": "Generate CLI code from specification"
+                  },
+                  {
+                    "name": "lint",
+                    "description": "Lint CLI specification files"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validate": {
+      "summary": "Validate CLI specification",
+      "description": "Validate a CLI specification file against the OpenCLI standard",
+      "operationId": "validateCommand",
+      "x-cli-category": "validation",
+      "x-performance": "fast",
+      "aliases": [
+        "val",
+        "check"
+      ],
+      "tags": [
+        "core"
+      ],
+      "parameters": [
+        {
+          "name": "file",
+          "in": "argument",
+          "position": 1,
+          "description": "Path to the CLI specification file",
+          "required": true,
+          "scope": "local",
+          "x-completion": "file",
+          "x-validation": "file-exists",
+          "schema": {
+            "type": "string",
+            "format": "path",
+            "example": "opencli.yaml"
+          }
+        },
+        {
+          "name": "strict",
+          "in": "flag",
+          "alias": [
+            "s"
+          ],
+          "description": "Enable strict validation mode",
+          "scope": "local",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        {
+          "name": "output",
+          "alias": [
+            "o"
+          ],
+          "description": "Output format for validation results",
+          "scope": "local",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "json",
+              "yaml",
+              "text"
+            ],
+            "default": "text"
+          }
+        }
+      ],
+      "responses": {
+        "0": {
+          "description": "Validation successful",
+          "content": {
+            "text/plain": {
+              "example": "✓ Validation successful\nNo errors found in opencli.yaml\n"
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "valid": {
+                    "type": "boolean"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "errors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "warnings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "valid": true,
+                "file": "opencli.yaml",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "application/yaml": {
+              "example": "valid: true\nfile: opencli.yaml\nerrors: []\nwarnings: []\n"
+            }
+          }
+        },
+        "1": {
+          "description": "Validation failed",
+          "content": {
+            "text/plain": {
+              "example": "✗ Validation failed\nFound 2 errors in opencli.yaml:\n  - Line 5: Missing required field 'operationId'\n  - Line 12: Invalid enum value 'invalid-type'\n"
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "valid": {
+                    "type": "boolean"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "errors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "line": {
+                          "type": "integer"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "error",
+                            "warning"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "warnings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "valid": false,
+                "file": "opencli.yaml",
+                "errors": [
+                  {
+                    "line": 5,
+                    "message": "Missing required field 'operationId'",
+                    "severity": "error"
+                  },
+                  {
+                    "line": 12,
+                    "message": "Invalid enum value 'invalid-type'",
+                    "severity": "error"
+                  }
+                ],
+                "warnings": []
+              }
+            }
+          }
+        },
+        "2": {
+          "description": "File not found or not readable",
+          "content": {
+            "text/plain": {
+              "example": "✗ Error: File not found\nCould not read 'missing-spec.yaml'\nPlease check the file path and permissions\n"
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "example": {
+                "code": 2,
+                "message": "File not found",
+                "details": "Could not read 'missing-spec.yaml'"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/generate": {
+      "summary": "Generate CLI code",
+      "description": "Generate CLI implementation code from specification",
+      "operationId": "generateCommand",
+      "aliases": [
+        "gen",
+        "codegen"
+      ],
+      "tags": [
+        "core"
+      ],
+      "parameters": [
+        {
+          "name": "spec",
+          "in": "argument",
+          "position": 1,
+          "description": "Path to the CLI specification file",
+          "required": true,
+          "scope": "local",
+          "schema": {
+            "type": "string",
+            "format": "path",
+            "example": "my-cli.yaml"
+          }
+        },
+        {
+          "name": "language",
+          "alias": [
+            "l"
+          ],
+          "description": "Target programming language",
+          "required": true,
+          "scope": "local",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "go",
+              "python",
+              "javascript",
+              "typescript",
+              "rust",
+              "java"
+            ],
+            "example": "go"
+          }
+        },
+        {
+          "name": "output-dir",
+          "alias": [
+            "o"
+          ],
+          "description": "Output directory for generated code",
+          "scope": "local",
+          "schema": {
+            "type": "string",
+            "format": "path",
+            "default": "./generated"
+          }
+        },
+        {
+          "name": "template",
+          "alias": [
+            "t"
+          ],
+          "description": "Code generation template",
+          "scope": "local",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "basic",
+              "advanced",
+              "framework"
+            ],
+            "default": "basic"
+          }
+        }
+      ],
+      "responses": {
+        "0": {
+          "description": "Code generation successful",
+          "content": {
+            "text/plain": {
+              "example": "✓ Code generation successful\nGenerated 5 files in ./generated:\n  - main.go\n  - cmd/root.go\n  - cmd/validate.go\n  - cmd/generate.go\n  - README.md\n"
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "output_directory": {
+                    "type": "string"
+                  },
+                  "files_generated": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "template": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "success": true,
+                "output_directory": "./generated",
+                "language": "go",
+                "template": "basic",
+                "files_generated": [
+                  {
+                    "path": "main.go",
+                    "size": 1024,
+                    "type": "source"
+                  },
+                  {
+                    "path": "cmd/root.go",
+                    "size": 2048,
+                    "type": "source"
+                  },
+                  {
+                    "path": "README.md",
+                    "size": 512,
+                    "type": "documentation"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "1": {
+          "description": "Generation failed",
+          "content": {
+            "text/plain": {
+              "example": "✗ Code generation failed\nError: Invalid specification file\nPlease run 'ocs validate' first\n"
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "example": {
+                "code": 1,
+                "message": "Code generation failed",
+                "details": "Invalid specification file. Please run validation first."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lint": {
+      "summary": "Lint multiple CLI specification files",
+      "description": "Check multiple CLI specification files for style and best practices",
+      "operationId": "lintCommand",
+      "aliases": [
+        "check-style"
+      ],
+      "tags": [
+        "core"
+      ],
+      "parameters": [
+        {
+          "name": "files",
+          "in": "argument",
+          "position": 1,
+          "description": "Paths to CLI specification files to lint",
+          "required": true,
+          "scope": "local",
+          "arity": {
+            "min": 1
+          },
+          "schema": {
+            "type": "string",
+            "format": "path",
+            "example": "spec1.yaml spec2.yaml"
+          }
+        },
+        {
+          "name": "rules",
+          "alias": [
+            "r"
+          ],
+          "description": "Specific linting rules to apply",
+          "scope": "local",
+          "arity": {
+            "min": 1,
+            "max": 10
+          },
+          "schema": {
+            "type": "string",
+            "example": "naming-convention parameter-validation"
+          }
+        },
+        {
+          "name": "exclude",
+          "alias": [
+            "x"
+          ],
+          "description": "Rules to exclude from linting",
+          "scope": "local",
+          "arity": {
+            "min": 0,
+            "max": 5
+          },
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "0": {
+          "description": "Linting completed successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files_checked": {
+                    "type": "integer"
+                  },
+                  "issues_found": {
+                    "type": "integer"
+                  },
+                  "passed": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationResult": {
+        "type": "object",
+        "required": [
+          "valid",
+          "file"
+        ],
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          },
+          "file": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "required": [
+          "line",
+          "message",
+          "severity"
+        ],
+        "properties": {
+          "line": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning"
+            ]
+          }
+        }
+      },
+      "GenerationResult": {
+        "type": "object",
+        "required": [
+          "success",
+          "output_directory"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "output_directory": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string"
+          },
+          "files_generated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GeneratedFile"
+            }
+          }
+        }
+      },
+      "GeneratedFile": {
+        "type": "object",
+        "required": [
+          "path",
+          "type"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "source",
+              "documentation",
+              "configuration"
+            ]
+          }
+        }
+      }
+    },
+    "parameters": {
+      "OutputFormat": {
+        "name": "output",
+        "alias": [
+          "o"
+        ],
+        "description": "Output format for results",
+        "scope": "local",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "json",
+            "yaml",
+            "text"
+          ],
+          "default": "text"
+        }
+      },
+      "ConfigFile": {
+        "name": "config",
+        "alias": [
+          "c"
+        ],
+        "description": "Path to configuration file",
+        "scope": "inherited",
+        "schema": {
+          "type": "string",
+          "format": "path",
+          "example": "~/.config/ocs/config.yaml"
+        }
+      }
+    },
+    "responses": {
+      "FileNotFound": {
+        "description": "File not found or not readable",
+        "content": {
+          "text/plain": {
+            "example": "✗ Error: File not found\nCould not read the specified file\nPlease check the file path and permissions\n"
+          },
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": 2,
+              "message": "File not found",
+              "details": "Could not read the specified file"
+            }
+          }
+        }
+      },
+      "ValidationSuccess": {
+        "description": "Validation completed successfully",
+        "content": {
+          "text/plain": {
+            "example": "✓ Validation successful\nNo errors found\n"
+          },
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationResult"
+            },
+            "example": {
+              "valid": true,
+              "file": "spec.yaml",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        }
+      },
+      "ValidationFailed": {
+        "description": "Validation failed with errors",
+        "content": {
+          "text/plain": {
+            "example": "✗ Validation failed\nFound errors in specification\n"
+          },
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationResult"
+            },
+            "example": {
+              "valid": false,
+              "file": "spec.yaml",
+              "errors": [
+                {
+                  "line": 5,
+                  "message": "Missing required field",
+                  "severity": "error"
+                }
+              ],
+              "warnings": []
+            }
+          }
+        }
+      }
+    }
+  }
+}

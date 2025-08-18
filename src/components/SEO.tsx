@@ -7,12 +7,19 @@ interface SEOProps {
 }
 
 const tabMetadata = {
-  home: {
+  overview: {
     title: 'OpenCLI Specification - Modern CLI Documentation Standard',
     description:
       'OpenCLI is a YAML-based specification for documenting command-line interfaces. Enable AI automation, standardize CLI documentation, and improve developer experience.',
     keywords:
       'opencli, cli, specification, yaml, command line, automation, ai, documentation, standard, developer tools',
+  },
+  reference: {
+    title: 'OpenCLI Documentation - Complete Reference Guide',
+    description:
+      'Comprehensive documentation and reference for the OpenCLI specification. Learn how to use OpenCLI for standardizing command-line interfaces.',
+    keywords:
+      'opencli documentation, cli reference, yaml guide, command line specification, developer documentation',
   },
   spec: {
     title: 'OpenCLI Specification - YAML Structure Documentation',
@@ -33,9 +40,9 @@ const baseMetadata = {
 };
 
 export const SEO: React.FC<SEOProps> = ({ activeTab }) => {
-  const metadata = tabMetadata[activeTab] || tabMetadata.home; // Fallback to home if tab not found
+  const metadata = tabMetadata[activeTab] || tabMetadata.overview; // Fallback to overview if tab not found
   const canonicalUrl = `${baseMetadata.siteUrl}/${
-    activeTab === 'home' || activeTab === 'spec' ? '' : activeTab
+    activeTab === 'overview' || activeTab === 'spec' ? '' : activeTab
   }`;
 
   return (

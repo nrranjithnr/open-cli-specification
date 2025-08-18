@@ -1,0 +1,118 @@
+/* CodeBlock Component Styles */
+.code-block {
+  position: relative;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  margin: 1rem 0;
+}
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.code-block__language {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-block__copy {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.code-block__copy:hover {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+.code-block__pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.code-block__code {
+  color: var(--text-color);
+  font-family: inherit;
+}
+
+/* Line numbers */
+.code-block__line {
+  display: flex;
+  align-items: flex-start;
+}
+
+.code-block__line-number {
+  display: inline-block;
+  width: 3rem;
+  text-align: right;
+  color: var(--text-muted);
+  user-select: none;
+  margin-right: 1rem;
+  border-right: 1px solid var(--border-color);
+  padding-right: 0.5rem;
+}
+
+.code-block__line-content {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Syntax highlighting */
+.code-block__code--yaml .code-block__line-content:has-text(':') {
+  color: var(--primary-color);
+}
+
+.code-block__code--json .code-block__line-content:has-text('"') {
+  color: var(--accent-color);
+}
+
+/* Scrollbars */
+.code-block__pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-block__pre::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+.code-block__pre::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.code-block__pre::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .code-block__pre {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .code-block__line-number {
+    width: 2.5rem;
+    margin-right: 0.75rem;
+  }
+}

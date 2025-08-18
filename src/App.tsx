@@ -4,6 +4,7 @@ import { Navigation } from './components/Navigation';
 import { SEO } from './components/SEO';
 import { Home } from './components/sections/Home';
 import { Spec } from './components/sections/Spec';
+import { Reference } from './components/sections/Reference';
 import { useResponsive } from './hooks/useResponsive';
 import { TabType } from './types';
 import './styles/globals.css';
@@ -64,9 +65,50 @@ const LoadingSpinner: React.FC = () => (
 
 // Main App Component
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('home');
+  // Initialize activeTab from URL hash or default to 'overview'
+  const getInitialTab = (): TabType => {
+    const hash = window.location.hash.slice(1); // Remove the '#'
+    const pathname = window.location.pathname;
+    const validTabs: TabType[] = ['overview', 'spec', 'reference'];
+
+    // Check hash first
+    if (hash && validTabs.includes(hash as TabType)) {
+      return hash as TabType;
+    }
+
+    // Check pathname for GitHub Pages redirects (e.g., /spec -> spec tab)
+    const pathTab = pathname.replace(/^\//, '').replace(/\/$/, '');
+    if (pathTab && validTabs.includes(pathTab as TabType)) {
+      // Update hash and return the tab
+      window.location.hash = pathTab;
+      return pathTab as TabType;
+    }
+
+    return 'overview';
+  };
+
+  const [activeTab, setActiveTab] = useState<TabType>(getInitialTab);
   const [isLoading, setIsLoading] = useState(true);
   const { isMobile, isTablet } = useResponsive();
+
+  // Handle browser back/forward navigation and hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveTab(getInitialTab());
+    };
+
+    const handlePopState = () => {
+      setActiveTab(getInitialTab());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -78,14 +120,19 @@ const App: React.FC = () => {
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
+
+    // Update URL hash only (simplify routing)
+    window.location.hash = tab;
   };
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'home':
+      case 'overview':
         return <Home onTabChange={handleTabChange} />;
       case 'spec':
         return <Spec />;
+      case 'reference':
+        return <Reference />;
       default:
         return <Home onTabChange={handleTabChange} />;
     }

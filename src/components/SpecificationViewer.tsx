@@ -1,101 +1,133 @@
-import React, { useState, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import {
+  ChevronRightIcon,
+  CopyIcon,
+  DownloadIcon,
+  ExpandIcon,
+  CollapseIcon,
+  TreeViewIcon,
+  CodeViewIcon,
+  JsonViewIcon,
+} from './icons';
 import './SpecificationViewer.css';
 
-// Simple chevron icon for expand/collapse
-const ChevronRightIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="9,18 15,12 9,6" />
-  </svg>
-);
-
-// Copy icon
-const CopyIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-  </svg>
-);
-
-// Download icon
-const DownloadIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7,10 12,15 17,10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-// Expand All icon
-const ExpandAllIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="7,13 12,18 17,13" />
-    <polyline points="7,6 12,11 17,6" />
-  </svg>
-);
-
-// Collapse All icon
-const CollapseAllIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    className={className}
-  >
-    <polyline points="17,11 12,6 7,11" />
-    <polyline points="17,18 12,13 7,18" />
-  </svg>
-);
+type ViewMode = 'tree' | 'code' | 'json';
 
 interface SpecificationViewerProps {
   data: any;
   className?: string;
-  onCopyYaml?: () => void;
+  onCopy?: (format: 'yaml' | 'json') => void;
   copySuccess?: string;
 }
 
 export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
   data,
   className = '',
-  onCopyYaml,
+  onCopy,
   copySuccess,
 }) => {
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(['root']));
+  const [viewMode, setViewMode] = useState<ViewMode>('tree');
+  const [rawYaml, setRawYaml] = useState<string>('');
+  const [rawJson, setRawJson] = useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Fetch raw YAML content for code view
+  useEffect(() => {
+    const fetchRawYaml = async () => {
+      try {
+        const response = await fetch('/opencli.yaml');
+        if (response.ok) {
+          const yamlContent = await response.text();
+          setRawYaml(yamlContent);
+        }
+      } catch (error) {
+        console.error('Failed to fetch raw YAML:', error);
+      }
+    };
+
+    if (viewMode === 'code' && !rawYaml) {
+      fetchRawYaml();
+    }
+  }, [viewMode, rawYaml]);
+
+  // Fetch raw JSON content for JSON view
+  useEffect(() => {
+    const fetchRawJson = async () => {
+      try {
+        const response = await fetch('/opencli.json');
+        if (response.ok) {
+          const jsonContent = await response.text();
+          setRawJson(jsonContent);
+        }
+      } catch (error) {
+        console.error('Failed to fetch raw JSON:', error);
+      }
+    };
+
+    if (viewMode === 'json' && !rawJson) {
+      fetchRawJson();
+    }
+  }, [viewMode, rawJson]);
+  const renderCodeView = () => {
+    if (!rawYaml) {
+      return (
+        <div className="specification-viewer__loading-code">
+          <div className="specification-viewer__loading-spinner" />
+          <p>Loading YAML content...</p>
+        </div>
+      );
+    }
+
+    const lines = rawYaml.split('\n');
+
+    return (
+      <div className="specification-viewer__code-view">
+        <pre className="specification-viewer__code-pre">
+          <code className="specification-viewer__code">
+            {lines.map((line, index) => (
+              <div key={index} className="specification-viewer__code-line">
+                <span className="specification-viewer__line-number">
+                  {(index + 1).toString().padStart(3, ' ')}
+                </span>
+                <span className="specification-viewer__line-content">{line || ' '}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
+      </div>
+    );
+  };
+
+  const renderJsonView = () => {
+    if (!rawJson) {
+      return (
+        <div className="specification-viewer__loading-code">
+          <div className="specification-viewer__loading-spinner" />
+          <p>Loading JSON content...</p>
+        </div>
+      );
+    }
+
+    const lines = rawJson.split('\n');
+
+    return (
+      <div className="specification-viewer__code-view">
+        <pre className="specification-viewer__code-pre">
+          <code className="specification-viewer__code specification-viewer__code--json">
+            {lines.map((line, index) => (
+              <div key={index} className="specification-viewer__code-line">
+                <span className="specification-viewer__line-number">
+                  {(index + 1).toString().padStart(3, ' ')}
+                </span>
+                <span className="specification-viewer__line-content">{line || ' '}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
+      </div>
+    );
+  };
 
   const toggleNode = useCallback(
     (path: string) => {
@@ -151,7 +183,6 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
     if (typeof value === 'string') return `"${value}"`;
     if (typeof value === 'boolean') return value.toString();
     if (typeof value === 'number') return value.toString();
-    // Don't show counts for objects and arrays when collapsed
     return '';
   };
 
@@ -226,45 +257,91 @@ export const SpecificationViewer: React.FC<SpecificationViewerProps> = ({
 
   return (
     <div className={`specification-viewer ${className}`}>
-      {/* Top-right action buttons */}
-      <div className="specification-viewer__actions">
-        {copySuccess && <div className="specification-viewer__copy-success">{copySuccess}</div>}
-        <button
-          className="specification-viewer__action-btn"
-          onClick={expandAll}
-          title="Expand all nodes"
-          type="button"
-        >
-          <ExpandAllIcon />
-        </button>
-        <button
-          className="specification-viewer__action-btn"
-          onClick={collapseAll}
-          title="Collapse all nodes"
-          type="button"
-        >
-          <CollapseAllIcon />
-        </button>
-        <button
-          className="specification-viewer__action-btn"
-          onClick={onCopyYaml}
-          title="Copy YAML to clipboard"
-          type="button"
-        >
-          <CopyIcon />
-        </button>
-        <a
-          href="/opencli.yaml"
-          download
-          className="specification-viewer__action-btn"
-          title="Download YAML file"
-        >
-          <DownloadIcon />
-        </a>
+      {/* View mode toggle and action buttons */}
+      <div className="specification-viewer__toolbar">
+        <div className="specification-viewer__view-toggle">
+          <button
+            className={`specification-viewer__view-btn ${
+              viewMode === 'tree' ? 'specification-viewer__view-btn--active' : ''
+            }`}
+            onClick={() => setViewMode('tree')}
+            title="Tree view"
+            type="button"
+          >
+            <TreeViewIcon size={18} />
+            <span>Tree</span>
+          </button>
+          <button
+            className={`specification-viewer__view-btn ${
+              viewMode === 'code' ? 'specification-viewer__view-btn--active' : ''
+            }`}
+            onClick={() => setViewMode('code')}
+            title="Code view (YAML)"
+            type="button"
+          >
+            <CodeViewIcon size={18} />
+            <span>YAML</span>
+          </button>
+          <button
+            className={`specification-viewer__view-btn ${
+              viewMode === 'json' ? 'specification-viewer__view-btn--active' : ''
+            }`}
+            onClick={() => setViewMode('json')}
+            title="JSON view"
+            type="button"
+          >
+            <JsonViewIcon size={18} />
+            <span>JSON</span>
+          </button>
+        </div>
+
+        <div className="specification-viewer__actions">
+          {copySuccess && <div className="specification-viewer__copy-success">{copySuccess}</div>}
+
+          {viewMode === 'tree' && (
+            <>
+              <button
+                className="specification-viewer__action-btn"
+                onClick={expandAll}
+                title="Expand all nodes"
+                type="button"
+              >
+                <ExpandIcon size={18} />
+              </button>
+              <button
+                className="specification-viewer__action-btn"
+                onClick={collapseAll}
+                title="Collapse all nodes"
+                type="button"
+              >
+                <CollapseIcon size={18} />
+              </button>
+            </>
+          )}
+
+          <button
+            className="specification-viewer__action-btn"
+            onClick={() => onCopy && onCopy(viewMode === 'json' ? 'json' : 'yaml')}
+            title={`Copy ${viewMode === 'json' ? 'JSON' : 'YAML'} to clipboard`}
+            type="button"
+          >
+            <CopyIcon />
+          </button>
+          <a
+            href={viewMode === 'json' ? '/opencli.json' : '/opencli.yaml'}
+            download
+            className="specification-viewer__action-btn"
+            title={`Download ${viewMode === 'json' ? 'JSON' : 'YAML'} file`}
+          >
+            <DownloadIcon />
+          </a>
+        </div>
       </div>
 
       <div className="specification-viewer__content" ref={contentRef}>
-        <div className="specification-viewer__tree">{treeData}</div>
+        {viewMode === 'tree' && <div className="specification-viewer__tree">{treeData}</div>}
+        {viewMode === 'code' && renderCodeView()}
+        {viewMode === 'json' && renderJsonView()}
       </div>
     </div>
   );
