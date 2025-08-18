@@ -1270,9 +1270,9 @@ url: "https://example.com/project/license.txt"`}</pre>
             <section id="section-command-responses" className="docs__section">
               <h2>commands.{`command`}.responses</h2>
               <p>
-                Defines the possible command outputs and exit codes. CLI responses use exit codes 
-                (0 for success, non-zero for errors) and can include both human-readable text 
-                and structured data outputs.
+                Defines the possible command outputs and exit codes. CLI responses use exit codes (0
+                for success, non-zero for errors) and can include both human-readable text and
+                structured data outputs.
               </p>
 
               <div className="docs__example">
