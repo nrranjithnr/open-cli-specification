@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "contact": {
       "name": "OpenCLI Working Group",
-      "url": "https://github.com/openclispec/open-cli-specification"
+      "url": "https://github.com/nrranjithnr/open-cli-specification"
     },
     "license": {
       "name": "Apache 2.0",
@@ -15,29 +15,20 @@
   },
   "externalDocs": {
     "description": "Find out more about OpenCLI",
-    "url": "https://www.openclispec.com"
+    "url": "https://www.openclispec.org"
   },
   "platforms": [
     {
       "name": "linux",
-      "architectures": [
-        "amd64",
-        "arm64"
-      ]
+      "architectures": ["amd64", "arm64"]
     },
     {
       "name": "darwin",
-      "architectures": [
-        "amd64",
-        "arm64"
-      ]
+      "architectures": ["amd64", "arm64"]
     },
     {
       "name": "windows",
-      "architectures": [
-        "amd64",
-        "arm64"
-      ]
+      "architectures": ["amd64", "arm64"]
     }
   ],
   "environment": [
@@ -77,18 +68,12 @@
       "summary": "Open CLI Spec tool",
       "description": "Main entry point for the Open CLI Specification tool",
       "operationId": "rootCommand",
-      "aliases": [
-        "opencli"
-      ],
-      "tags": [
-        "core"
-      ],
+      "aliases": ["opencli"],
+      "tags": ["core"],
       "parameters": [
         {
           "name": "config",
-          "alias": [
-            "c"
-          ],
+          "alias": ["c"],
           "description": "Path to configuration file",
           "scope": "inherited",
           "schema": {
@@ -100,9 +85,7 @@
         {
           "name": "verbose",
           "in": "flag",
-          "alias": [
-            "v"
-          ],
+          "alias": ["v"],
           "description": "Enable verbose output",
           "scope": "inherited",
           "schema": {
@@ -113,9 +96,7 @@
         {
           "name": "quiet",
           "in": "flag",
-          "alias": [
-            "q"
-          ],
+          "alias": ["q"],
           "description": "Suppress non-essential output",
           "scope": "inherited",
           "schema": {
@@ -126,9 +107,7 @@
         {
           "name": "version",
           "in": "flag",
-          "alias": [
-            "V"
-          ],
+          "alias": ["V"],
           "description": "Show CLI version",
           "scope": "local",
           "schema": {
@@ -138,9 +117,7 @@
         {
           "name": "help",
           "in": "flag",
-          "alias": [
-            "h"
-          ],
+          "alias": ["h"],
           "description": "Show help information",
           "scope": "local",
           "schema": {
@@ -214,13 +191,8 @@
       "operationId": "validateCommand",
       "x-cli-category": "validation",
       "x-performance": "fast",
-      "aliases": [
-        "val",
-        "check"
-      ],
-      "tags": [
-        "core"
-      ],
+      "aliases": ["val", "check"],
+      "tags": ["core"],
       "parameters": [
         {
           "name": "file",
@@ -240,9 +212,7 @@
         {
           "name": "strict",
           "in": "flag",
-          "alias": [
-            "s"
-          ],
+          "alias": ["s"],
           "description": "Enable strict validation mode",
           "scope": "local",
           "schema": {
@@ -252,18 +222,12 @@
         },
         {
           "name": "output",
-          "alias": [
-            "o"
-          ],
+          "alias": ["o"],
           "description": "Output format for validation results",
           "scope": "local",
           "schema": {
             "type": "string",
-            "enum": [
-              "json",
-              "yaml",
-              "text"
-            ],
+            "enum": ["json", "yaml", "text"],
             "default": "text"
           }
         }
@@ -340,10 +304,7 @@
                         },
                         "severity": {
                           "type": "string",
-                          "enum": [
-                            "error",
-                            "warning"
-                          ]
+                          "enum": ["error", "warning"]
                         }
                       }
                     }
@@ -400,13 +361,8 @@
       "summary": "Generate CLI code",
       "description": "Generate CLI implementation code from specification",
       "operationId": "generateCommand",
-      "aliases": [
-        "gen",
-        "codegen"
-      ],
-      "tags": [
-        "core"
-      ],
+      "aliases": ["gen", "codegen"],
+      "tags": ["core"],
       "parameters": [
         {
           "name": "spec",
@@ -423,30 +379,19 @@
         },
         {
           "name": "language",
-          "alias": [
-            "l"
-          ],
+          "alias": ["l"],
           "description": "Target programming language",
           "required": true,
           "scope": "local",
           "schema": {
             "type": "string",
-            "enum": [
-              "go",
-              "python",
-              "javascript",
-              "typescript",
-              "rust",
-              "java"
-            ],
+            "enum": ["go", "python", "javascript", "typescript", "rust", "java"],
             "example": "go"
           }
         },
         {
           "name": "output-dir",
-          "alias": [
-            "o"
-          ],
+          "alias": ["o"],
           "description": "Output directory for generated code",
           "scope": "local",
           "schema": {
@@ -457,18 +402,12 @@
         },
         {
           "name": "template",
-          "alias": [
-            "t"
-          ],
+          "alias": ["t"],
           "description": "Code generation template",
           "scope": "local",
           "schema": {
             "type": "string",
-            "enum": [
-              "basic",
-              "advanced",
-              "framework"
-            ],
+            "enum": ["basic", "advanced", "framework"],
             "default": "basic"
           }
         }
@@ -565,12 +504,8 @@
       "summary": "Lint multiple CLI specification files",
       "description": "Check multiple CLI specification files for style and best practices",
       "operationId": "lintCommand",
-      "aliases": [
-        "check-style"
-      ],
-      "tags": [
-        "core"
-      ],
+      "aliases": ["check-style"],
+      "tags": ["core"],
       "parameters": [
         {
           "name": "files",
@@ -590,9 +525,7 @@
         },
         {
           "name": "rules",
-          "alias": [
-            "r"
-          ],
+          "alias": ["r"],
           "description": "Specific linting rules to apply",
           "scope": "local",
           "arity": {
@@ -606,9 +539,7 @@
         },
         {
           "name": "exclude",
-          "alias": [
-            "x"
-          ],
+          "alias": ["x"],
           "description": "Rules to exclude from linting",
           "scope": "local",
           "arity": {
@@ -649,10 +580,7 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": [
-          "code",
-          "message"
-        ],
+        "required": ["code", "message"],
         "properties": {
           "code": {
             "type": "integer",
@@ -668,10 +596,7 @@
       },
       "ValidationResult": {
         "type": "object",
-        "required": [
-          "valid",
-          "file"
-        ],
+        "required": ["valid", "file"],
         "properties": {
           "valid": {
             "type": "boolean"
@@ -695,11 +620,7 @@
       },
       "ValidationError": {
         "type": "object",
-        "required": [
-          "line",
-          "message",
-          "severity"
-        ],
+        "required": ["line", "message", "severity"],
         "properties": {
           "line": {
             "type": "integer"
@@ -709,19 +630,13 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "error",
-              "warning"
-            ]
+            "enum": ["error", "warning"]
           }
         }
       },
       "GenerationResult": {
         "type": "object",
-        "required": [
-          "success",
-          "output_directory"
-        ],
+        "required": ["success", "output_directory"],
         "properties": {
           "success": {
             "type": "boolean"
@@ -745,10 +660,7 @@
       },
       "GeneratedFile": {
         "type": "object",
-        "required": [
-          "path",
-          "type"
-        ],
+        "required": ["path", "type"],
         "properties": {
           "path": {
             "type": "string"
@@ -758,11 +670,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "source",
-              "documentation",
-              "configuration"
-            ]
+            "enum": ["source", "documentation", "configuration"]
           }
         }
       }
@@ -770,26 +678,18 @@
     "parameters": {
       "OutputFormat": {
         "name": "output",
-        "alias": [
-          "o"
-        ],
+        "alias": ["o"],
         "description": "Output format for results",
         "scope": "local",
         "schema": {
           "type": "string",
-          "enum": [
-            "json",
-            "yaml",
-            "text"
-          ],
+          "enum": ["json", "yaml", "text"],
           "default": "text"
         }
       },
       "ConfigFile": {
         "name": "config",
-        "alias": [
-          "c"
-        ],
+        "alias": ["c"],
         "description": "Path to configuration file",
         "scope": "inherited",
         "schema": {

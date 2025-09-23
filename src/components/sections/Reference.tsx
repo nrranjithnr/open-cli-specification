@@ -19,7 +19,7 @@ const getExample = (id: string): string | undefined => {
   version: "1.0.0"
   contact:
     name: "OpenCLI Working Group"
-    url: "https://github.com/openclispec/open-cli-specification"
+    url: "https://github.com/nrranjithnr/open-cli-specification"
   license:
     name: "Apache 2.0"
     url: "https://www.apache.org/licenses/LICENSE-2.0"`,
@@ -36,13 +36,13 @@ const getExample = (id: string): string | undefined => {
     'info-contact': `info:
   contact:
     name: "OpenCLI Working Group"
-    url: "https://github.com/openclispec/open-cli-specification"`,
+    url: "https://github.com/nrranjithnr/open-cli-specification"`,
 
     'contact-name': `contact:
   name: "OpenCLI Working Group"`,
 
     'contact-url': `contact:
-  url: "https://github.com/openclispec/open-cli-specification"`,
+  url: "https://github.com/nrranjithnr/open-cli-specification"`,
 
     'contact-email': `contact:
   email: "team@opencli.org"`,
@@ -60,7 +60,7 @@ const getExample = (id: string): string | undefined => {
 
     externalDocs: `externalDocs:
   description: "Find out more about OpenCLI"
-  url: "https://www.openclispec.com"`,
+  url: "https://www.openclispec.org"`,
 
     commands: `commands:
   ocs:
@@ -270,7 +270,7 @@ const getExample = (id: string): string | undefined => {
   description: "Find out more about OpenCLI"`,
 
     'externalDocs-url': `externalDocs:
-  url: "https://www.openclispec.com"`,
+  url: "https://www.openclispec.org"`,
 
     'environment-name': `environment:
   - name: "OCS_CONFIG_PATH"`,
@@ -376,7 +376,7 @@ const getExample = (id: string): string | undefined => {
   description: "Find out more about OpenCLI"`,
 
     'externaldocs-url': `externalDocs:
-  url: "https://www.openclispec.com"`,
+  url: "https://www.openclispec.org"`,
 
     // Parameter sub-properties from opencli.yaml
     'parameter-name': `parameters:

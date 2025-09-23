@@ -6,7 +6,7 @@
 
   <!-- Main website pages -->
   <url>
-    <loc>https://www.openclispec.com/</loc>
+    <loc>https://www.openclispec.org/</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- Specification section -->
   <url>
-    <loc>https://www.openclispec.com/#spec</loc>
+    <loc>https://www.openclispec.org/#spec</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -22,7 +22,7 @@
 
   <!-- Examples section -->
   <url>
-    <loc>https://www.openclispec.com/#examples</loc>
+    <loc>https://www.openclispec.org/#examples</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -30,7 +30,7 @@
 
   <!-- Validator section -->
   <url>
-    <loc>https://www.openclispec.com/#validator</loc>
+    <loc>https://www.openclispec.org/#validator</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -38,7 +38,7 @@
 
   <!-- About section -->
   <url>
-    <loc>https://www.openclispec.com/#about</loc>
+    <loc>https://www.openclispec.org/#about</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -46,7 +46,7 @@
 
   <!-- HTML Sitemap -->
   <url>
-    <loc>https://www.openclispec.com/sitemap.html</loc>
+    <loc>https://www.openclispec.org/sitemap.html</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

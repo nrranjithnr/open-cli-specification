@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.openclispec.com/sitemap.xml
+Sitemap: https://www.openclispec.org/sitemap.xml
 
 # Crawl delay (be nice to servers)
 Crawl-delay: 1

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "OpenCLI Specification - The industry standard for defining command-line interfaces",
   "private": true,
-  "homepage": "https://www.openclispec.com",
+  "homepage": "https://www.openclispec.org",
   "dependencies": {
     "js-yaml": "^4.1.0",
     "react": "^18.2.0",
@@ -68,9 +68,9 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openclispec/open-cli-specification.git"
+    "url": "https://github.com/nrranjithnr/open-cli-specification.git"
   },
   "bugs": {
-    "url": "https://github.com/openclispec/open-cli-specification/issues"
+    "url": "https://github.com/nrranjithnr/open-cli-specification/issues"
   }
 }
