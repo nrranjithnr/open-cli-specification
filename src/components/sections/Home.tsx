@@ -72,7 +72,7 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
                 Explore Specification
               </Button>
               <a
-                href="https://github.com/openclispec/open-cli-specification"
+                href="https://github.com/nrranjithnr/open-cli-specification"
                 className="home__cta-secondary btn btn--outline btn--lg"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -294,7 +294,7 @@ commands:
 
               <div className="home__cta-links">
                 <a
-                  href="https://github.com/openclispec/open-cli-specification"
+                  href="https://github.com/nrranjithnr/open-cli-specification"
                   className="home__cta-link"
                   target="_blank"
                   rel="noopener noreferrer"

@@ -5,13 +5,13 @@ info:
   version: 1.0.0
   contact:
     name: OpenCLI Working Group
-    url: https://github.com/openclispec/open-cli-specification
+    url: https://github.com/nrranjithnr/open-cli-specification
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 externalDocs:
   description: Find out more about OpenCLI
-  url: https://www.openclispec.com
+  url: https://www.openclispec.org
 platforms:
   - name: linux
     architectures:

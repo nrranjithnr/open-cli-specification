@@ -32,7 +32,7 @@ const tabMetadata = {
 
 const baseMetadata = {
   siteName: 'OpenCLI Specification',
-  siteUrl: 'https://openclispec.dev',
+  siteUrl: 'https://nrranjithnr.dev',
   author: 'OpenCLI Team',
   twitterHandle: '@opencli',
   image: '/og-image.png',

@@ -3,8 +3,8 @@
 ## The Industry Standard for Command-Line Interface Documentation
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/openclispec/open-cli-specification)
-[![OpenCLI](https://img.shields.io/badge/OpenCLI-1.0.0-orange.svg)](https://github.com/openclispec/open-cli-specification)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/nrranjithnr/open-cli-specification)
+[![OpenCLI](https://img.shields.io/badge/OpenCLI-1.0.0-orange.svg)](https://github.com/nrranjithnr/open-cli-specification)
 
 > **A standardized specification for command-line interface documentation and automation.**
 
@@ -362,13 +362,13 @@ mycli command --param value     # Consistent parameter handling
 
 ### **💬 Get Involved**
 
-- **[GitHub Discussions](https://github.com/openclispec/open-cli-specification/discussions)** - Spec evolution and community discussion
-- **[GitHub Issues](https://github.com/openclispec/open-cli-specification/issues)** - Bug reports, features, and feedback
+- **[GitHub Discussions](https://github.com/nrranjithnr/open-cli-specification/discussions)** - Spec evolution and community discussion
+- **[GitHub Issues](https://github.com/nrranjithnr/open-cli-specification/issues)** - Bug reports, features, and feedback
 
 ### **📚 Resources**
 
-- **[Full Specification](https://www.openclispec.com/#/spec)** - Complete YAML schema and documentation
-- **[Interactive Viewer](https://www.openclispec.com)** - Explore the specification online
+- **[Full Specification](https://www.openclispec.org/#/spec)** - Complete YAML schema and documentation
+- **[Interactive Viewer](https://www.openclispec.org)** - Explore the specification online
   <!-- Future resources as the project grows:
   - **[Migration Guide](#)** - Convert existing CLIs to OpenCLI
   - **[Best Practices](#)** - Industry recommendations
@@ -382,9 +382,9 @@ mycli command --param value     # Consistent parameter handling
 
 ### **Choose Your Path:**
 
-[![View Full Specification](https://img.shields.io/badge/📖_View_Specification-blue?style=for-the-badge)](https://www.openclispec.com/#/spec)
-[![Explore Examples](https://img.shields.io/badge/🔍_Explore_Examples-green?style=for-the-badge)](https://www.openclispec.com)
-[![GitHub Repository](https://img.shields.io/badge/⭐_GitHub_Repository-black?style=for-the-badge)](https://github.com/openclispec/open-cli-specification)
+[![View Full Specification](https://img.shields.io/badge/📖_View_Specification-blue?style=for-the-badge)](https://www.openclispec.org/#/spec)
+[![Explore Examples](https://img.shields.io/badge/🔍_Explore_Examples-green?style=for-the-badge)](https://www.openclispec.org)
+[![GitHub Repository](https://img.shields.io/badge/⭐_GitHub_Repository-black?style=for-the-badge)](https://github.com/nrranjithnr/open-cli-specification)
 
 </div>
 

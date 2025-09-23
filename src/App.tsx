@@ -194,7 +194,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="terminal-status-right">
                   <a
-                    href="https://github.com/openclispec/open-cli-specification"
+                    href="https://github.com/nrranjithnr/open-cli-specification"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="terminal-status__link"
