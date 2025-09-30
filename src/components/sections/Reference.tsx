@@ -522,7 +522,7 @@ const createDocContent = (section: any): string => {
       'externaldocs-description': 'Brief summary of what the external documentation contains.',
       'externaldocs-url': 'Direct link to comprehensive guides and documentation.',
 
-      'platform-name': 'Operating system identifier (linux, darwin, windows, etc.).',
+      'platform-name': 'Operating system identifier (linux, macos, windows, etc.).',
       'platform-architectures': 'Supported CPU architectures for this platform.',
 
       'env-name': 'Environment variable name that your CLI tool recognizes.',

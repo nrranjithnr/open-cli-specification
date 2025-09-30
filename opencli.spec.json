@@ -1,0 +1,445 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://www.openclispec.org/schema/v1.0.0",
+  "title": "OpenCLI Specification",
+  "description": "The OpenCLI Specification v1.0.0 - A standardized specification for defining command-line interfaces",
+  "type": "object",
+  "required": ["opencli", "info", "commands"],
+  "additionalProperties": false,
+  "properties": {
+    "opencli": {
+      "description": "Specifies which version of the OpenCLI specification your CLI tool follows. Always place this as the first field in your YAML file.",
+      "const": "1.0.0"
+    },
+    "info": {
+      "type": "object",
+      "description": "Core metadata that identifies your CLI tool to users and package managers.",
+      "required": ["title", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Human-readable name of your CLI application (used in help text and documentation).",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief explanation of what your CLI tool does (appears in --help output)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Current version following semantic versioning (major.minor.patch).",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.-]+)?(\\+[a-zA-Z0-9.-]+)?$"
+        },
+        "contact": {
+          "type": "object",
+          "description": "How users can reach you for support, bug reports, or contributions.",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Maintainer name or organization responsible for the CLI tool."
+            },
+            "url": {
+              "type": "string",
+              "description": "Primary support channel (GitHub issues, website, etc.).",
+              "format": "uri"
+            },
+            "email": {
+              "type": "string",
+              "description": "Direct email for urgent issues or security reports.",
+              "format": "email"
+            }
+          }
+        },
+        "license": {
+          "type": "object",
+          "description": "Legal terms under which your CLI tool is distributed.",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "SPDX license identifier (e.g., MIT, Apache-2.0, GPL-3.0)."
+            },
+            "url": {
+              "type": "string",
+              "description": "Full license text location for legal compliance.",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "type": "object",
+      "description": "Links to comprehensive guides, tutorials, and API documentation.",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Brief summary of what the external documentation contains."
+        },
+        "url": {
+          "type": "string",
+          "description": "Direct link to comprehensive guides and documentation.",
+          "format": "uri"
+        }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "description": "OS-specific configurations for Windows, macOS, and Linux distributions.",
+      "items": {
+        "$ref": "#/definitions/Platform"
+      }
+    },
+    "environment": {
+      "type": "array",
+      "description": "Maps environment variables to CLI parameters for containerized deployments.",
+      "items": {
+        "$ref": "#/definitions/EnvironmentVariable"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Logical grouping system for organizing commands by feature or domain.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "commands": {
+      "type": "object",
+      "description": "Hierarchical structure defining all available CLI commands and subcommands.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/definitions/Command"
+      }
+    },
+    "components": {
+      "type": "object",
+      "description": "Reusable components for the specification.",
+      "additionalProperties": false,
+      "properties": {
+        "schemas": {
+          "type": "object",
+          "description": "Reusable data schemas for validation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Reusable parameter definitions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "responses": {
+          "type": "object",
+          "description": "Reusable response definitions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Response"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Platform": {
+      "type": "object",
+      "description": "Platform and architecture information.",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operating system identifier (linux, macos, windows, etc.).",
+          "enum": ["windows", "macos", "darwin", "ios", "linux", "android", "freebsd", "dragonfly", "openbsd", "netbsd", "aix", "solaris"]
+        },
+        "architectures": {
+          "type": "array",
+          "description": "Supported CPU architectures for this platform.",
+          "items": {
+            "type": "string",
+            "enum": ["amd64", "x86_64", "386", "x86", "arm64", "aarch64", "arm", "armv5te", "armv7", "thumbv7", "ppc64", "ppc64le", "powerpc", "powerpc64", "powerpc64le", "mips", "mipsel", "mips64", "mips64el", "s390x", "riscv64", "riscv32", "wasm32", "wasm64", "sparc64", "hexagon", "loongarch64"]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "Environment variable definition.",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment variable name that your CLI tool recognizes.",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Purpose and usage of this environment variable."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Tag for grouping and organizing commands.",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier for organizing related commands.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable explanation of what commands share this tag."
+        }
+      }
+    },
+    "Command": {
+      "type": "object",
+      "description": "Command definition with metadata, parameters, and responses.",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension property (vendor-specific metadata)"
+        }
+      },
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "One-line description shown in command help listings."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of command purpose and behavior."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Unique identifier for programmatic access (for testing, docs, etc.).",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Alternative command names for user convenience.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Categories for organizing commands in help and documentation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "All flags, options, and arguments this command accepts.",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "responses": {
+          "type": "object",
+          "description": "Exit codes and output formats users can expect.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Response"
+          }
+        }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "Parameter, flag, or argument definition.",
+      "required": ["name"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension property (vendor-specific metadata)"
+        }
+      },
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier for the parameter within the command.",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "in": {
+          "type": "string",
+          "description": "Where the parameter appears (argument for positional, flag for boolean, option for named).",
+          "enum": ["argument", "flag", "option"]
+        },
+        "position": {
+          "type": "integer",
+          "description": "Order position for positional arguments (starting from 1).",
+          "minimum": 1
+        },
+        "alias": {
+          "type": "array",
+          "description": "Short form alternatives (e.g., -v for --verbose).",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Help text shown to users explaining the parameter purpose."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether users must provide this parameter.",
+          "default": false
+        },
+        "scope": {
+          "type": "string",
+          "description": "Inheritance behavior - local (this command only) or inherited (available to subcommands).",
+          "enum": ["local", "inherited"],
+          "default": "local"
+        },
+        "arity": {
+          "type": "object",
+          "description": "How many values this parameter accepts (useful for arrays and lists).",
+          "additionalProperties": false,
+          "properties": {
+            "min": {
+              "type": "integer",
+              "description": "Minimum number of values required.",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "description": "Maximum number of values allowed.",
+              "minimum": 1
+            }
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "Data type, validation rules, and constraints for parameter values."
+        }
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "description": "Schema definition for parameter or response validation.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Data type for validation (string, integer, boolean, array, object).",
+          "enum": ["string", "integer", "number", "boolean", "array", "object"]
+        },
+        "format": {
+          "type": "string",
+          "description": "Format hint for specialized string types (path, email, uri, date).",
+          "enum": ["path", "email", "uri", "url", "date", "date-time", "time", "uuid", "ipv4", "ipv6", "hostname", "int32", "int64", "float", "double"]
+        },
+        "enum": {
+          "type": "array",
+          "description": "Restricted list of allowed values for this parameter.",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "integer" },
+              { "type": "number" },
+              { "type": "boolean" }
+            ]
+          },
+          "minItems": 1
+        },
+        "default": {
+          "description": "Value used when parameter is not provided by the user."
+        },
+        "example": {
+          "description": "Sample value shown in help text and documentation."
+        },
+        "items": {
+          "$ref": "#/definitions/Schema",
+          "description": "Schema for array items when type is 'array'."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Property schemas when type is 'object'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "required": {
+          "type": "array",
+          "description": "Required property names when type is 'object'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minimum": {
+          "type": "number",
+          "description": "Minimum value for numeric types."
+        },
+        "maximum": {
+          "type": "number",
+          "description": "Maximum value for numeric types."
+        },
+        "minLength": {
+          "type": "integer",
+          "description": "Minimum length for string types.",
+          "minimum": 0
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": "Maximum length for string types.",
+          "minimum": 0
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Regular expression pattern for string validation.",
+          "format": "regex"
+        },
+        "$ref": {
+          "type": "string",
+          "description": "Reference to a reusable component schema.",
+          "pattern": "^#/components/schemas/[a-zA-Z0-9_-]+$"
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "description": "Response definition for a specific exit code.",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable explanation of when this response occurs."
+        },
+        "content": {
+          "type": "object",
+          "description": "Output format examples by media type (text/plain, application/json, etc.).",
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaType"
+          }
+        }
+      }
+    },
+    "MediaType": {
+      "type": "object",
+      "description": "Media type specific response content.",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "Schema definition for the response content."
+        },
+        "example": {
+          "description": "Example response content for this media type."
+        }
+      }
+    }
+  }
+}
