@@ -1,0 +1,33 @@
+name: check-schema
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Validate schema
+      - name: Validate schema compliance
+        run: npx --package=ajv-cli --package=ajv-formats -- ajv compile -s opencli.spec.json --spec=draft7 --strict=true -c ajv-formats
+
+      # Validate the example files against the schema
+      - name: Validate opencli.json against schema
+        run: npx --package=ajv-cli --package=ajv-formats -- ajv validate -d public/opencli.json -s opencli.spec.json --spec=draft7 --strict=true -c ajv-formats
+
+      - name: Validate opencli.yaml against schema
+        run: npx --package=ajv-cli --package=ajv-formats -- ajv validate -d public/opencli.yaml -s opencli.spec.json --spec=draft7 --strict=true -c ajv-formats

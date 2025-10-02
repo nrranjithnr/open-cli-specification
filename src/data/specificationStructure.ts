@@ -125,7 +125,7 @@ export const specificationStructure: SpecSection[] = [
             id: 'platform-name',
             title: 'name',
             type: 'string',
-            description: 'Platform name (e.g., linux, darwin, windows)',
+            description: 'Platform name (e.g., linux, macos, windows)',
           },
           {
             id: 'platform-architectures',
