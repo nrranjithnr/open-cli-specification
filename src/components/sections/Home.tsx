@@ -303,6 +303,15 @@ commands:
                   GitHub Repository
                 </a>
                 <a
+                  href="https://discord.gg/DHthnuhWBm"
+                  className="home__cta-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="home__cta-icon">💬</span>
+                  Join Discord
+                </a>
+                <a
                   href="#"
                   className="home__cta-link"
                   onClick={e => {
