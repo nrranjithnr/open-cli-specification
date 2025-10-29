@@ -80,6 +80,15 @@ export const Home: React.FC<HomeProps> = ({ className = '', onTabChange }) => {
                 <span className="home__cta-icon">⭐</span>
                 Star on GitHub
               </a>
+              <a
+                href="https://discord.gg/DHthnuhWBm"
+                className="home__cta-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="home__cta-icon">💬</span>
+                Join Discord
+              </a>
             </div>
           </div>
         </section>

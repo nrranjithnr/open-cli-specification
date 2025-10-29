@@ -202,6 +202,15 @@ const App: React.FC = () => {
                     GitHub
                   </a>
                   <span className="terminal-status__separator">|</span>
+                  <a
+                    href="https://discord.gg/DHthnuhWBm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="terminal-status__link"
+                  >
+                    Discord
+                  </a>
+                  <span className="terminal-status__separator">|</span>
                   <span className="terminal-status__item">Line 1, Col 1</span>
                 </div>
               </div>
