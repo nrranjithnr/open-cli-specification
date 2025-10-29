@@ -362,6 +362,7 @@ mycli command --param value     # Consistent parameter handling
 
 ### **💬 Get Involved**
 
+- **[Discord Community](https://discord.gg/DHthnuhWBm)** - Join our Discord server for real-time discussions
 - **[GitHub Discussions](https://github.com/nrranjithnr/open-cli-specification/discussions)** - Spec evolution and community discussion
 - **[GitHub Issues](https://github.com/nrranjithnr/open-cli-specification/issues)** - Bug reports, features, and feedback
 
